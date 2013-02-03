@@ -32,8 +32,8 @@ namespace ShockClock
         /// </summary>
         private int currentSecond;
         private int recordingHandle; // Handle of the recording stream
-        private RECORDPROC recordProc = new RECORDPROC(RecordHandler); // Recording Callback
         private DSP_PeakLevelMeter peakLevelMeter; // Peak Level Meter
+        private LightsControl lightsControl = new LightsControl();
 
         public MainWindow()
         {
@@ -61,7 +61,7 @@ namespace ShockClock
                 throw new ApplicationException();
             }
             // Start recording
-            recordingHandle = Bass.BASS_RecordStart(44100, 2, BASSFlag.BASS_SAMPLE_FLOAT, recordProc, IntPtr.Zero);
+            recordingHandle = Bass.BASS_RecordStart(44100, 2, BASSFlag.BASS_SAMPLE_FLOAT, null, IntPtr.Zero);
             // Add Peak Level Meter DSP and Event Handler
             peakLevelMeter = new DSP_PeakLevelMeter(recordingHandle, 1);
             peakLevelMeter.Notification += new EventHandler(PeakLevelMeterNotification);
@@ -74,10 +74,17 @@ namespace ShockClock
             // Start timer to update clock each second
             timer.Elapsed += timer_Elapsed;
             timer.Start();
+            // Light Event Handlers
+            lightsControl.StudioOnAir += new EventHandler(StudioLightOn);
+            lightsControl.StudioOffAir += new EventHandler(StudioLightOff);
+            lightsControl.EmergencyOn += new EventHandler(EmergencyLightOn);
+            lightsControl.EmergencyOff += new EventHandler(EmergencyLightOff);
         }
 
         ~MainWindow()
         {
+            // Kill sockets
+            lightsControl.Stop();
             // Stop timer
             timer.Stop();
         }
@@ -207,53 +214,189 @@ namespace ShockClock
                     hourText = "Twelve";
                     break;
             }
-            if (minute >= 55)
+
+            switch (minute)
             {
-                hourText += " Fifty Five";
-            }
-            else if (minute >= 50)
-            {
-                hourText += " Fifty";
-            }
-            else if (minute >= 45)
-            {
-                hourText += " Forty Five";
-            }
-            else if (minute >= 40)
-            {
-                hourText += " Forty";
-            }
-            else if (minute >= 35)
-            {
-                hourText += " Thirty Five";
-            }
-            else if (minute >= 30)
-            {
-                hourText = "Half Past " + hourText;
-            }
-            else if (minute >= 25)
-            {
-                hourText += " Twenty Five";
-            }
-            else if (minute >= 20)
-            {
-                hourText += " Twenty";
-            }
-            else if (minute >= 15)
-            {
-                hourText = "Quarter Past " + hourText;
-            }
-            else if (minute >= 10)
-            {
-                hourText = "Ten Past " + hourText;
-            }
-            else if (minute >= 5)
-            {
-                hourText = "Five Past " + hourText;
-            }
-            else
-            {
-                hourText += " O'Clock";
+                case 0:
+                    hourText = hourText + " O'Clock";
+                    break;
+                case 1:
+                    hourText = "One Past " + hourText;
+                    break;
+                case 2:
+                    hourText = "Two Past " + hourText;
+                    break;
+                case 3:
+                    hourText = "Three Past " + hourText;
+                    break;
+                case 4:
+                    hourText = "Four Past " + hourText;
+                    break;
+                case 5:
+                    hourText = "Five Past " + hourText;
+                    break;
+                case 6:
+                    hourText = "Six Past " + hourText;
+                    break;
+                case 7:
+                    hourText = "Seven Past " + hourText;
+                    break;
+                case 8:
+                    hourText = "Eight Past " + hourText;
+                    break;
+                case 9:
+                    hourText = "Nine Past " + hourText;
+                    break;
+                case 10:
+                    hourText = "Ten Past " + hourText;
+                    break;
+                case 11:
+                    hourText = hourText + " Eleven";
+                    break;
+                case 12:
+                    hourText = hourText + " Twleve";
+                    break;
+                case 13:
+                    hourText = hourText + " Thirteen";
+                    break;
+                case 14:
+                    hourText = hourText + " Fourteen";
+                    break;
+                case 15:
+                    hourText = "Quarter Past " + hourText;
+                    break;
+                case 16:
+                    hourText = hourText + " Sixteen";
+                    break;
+                case 17:
+                    hourText = hourText + " Seventeen";
+                    break;
+                case 18:
+                    hourText = hourText + " Eighteen";
+                    break;
+                case 19:
+                    hourText = hourText + " Nineteen";
+                    break;
+                case 20:
+                    hourText = hourText + " Twenty";
+                    break;
+                case 21:
+                    hourText = hourText + " Twenty One";
+                    break;
+                case 22:
+                    hourText = hourText + " Twenty Two";
+                    break;
+                case 23:
+                    hourText = hourText + " Twenty Three";
+                    break;
+                case 24:
+                    hourText = hourText + " Twenty Four";
+                    break;
+                case 25:
+                    hourText = hourText + " Twenty Five";
+                    break;
+                case 26:
+                    hourText = hourText + " Twenty Six";
+                    break;
+                case 27:
+                    hourText = hourText + " Twenty Seven";
+                    break;
+                case 28:
+                    hourText = hourText + " Twenty Eight";
+                    break;
+                case 29:
+                    hourText = hourText + " Twenty Nine";
+                    break;
+                case 30:
+                    hourText = "Half Past " + hourText;
+                    break;
+                case 31:
+                    hourText = hourText + " Thirty One";
+                    break;
+                case 32:
+                    hourText = hourText + " Thirty Two";
+                    break;
+                case 33:
+                    hourText = hourText + " Thirty Three";
+                    break;
+                case 34:
+                    hourText = hourText + " Thirty Four";
+                    break;
+                case 35:
+                    hourText = hourText + " Thirty Five";
+                    break;
+                case 36:
+                    hourText = hourText + " Thirty Six";
+                    break;
+                case 37:
+                    hourText = hourText + " Thirty Seven";
+                    break;
+                case 38:
+                    hourText = hourText + " Thirty Eight";
+                    break;
+                case 39:
+                    hourText = hourText + " Thirty Nine";
+                    break;
+                case 40:
+                    hourText = hourText + " Fourty";
+                    break;
+                case 41:
+                    hourText = hourText + " Fourty One";
+                    break;
+                case 42:
+                    hourText = hourText + " Fourty Two";
+                    break;
+                case 43:
+                    hourText = hourText + " Fourty Three";
+                    break;
+                case 44:
+                    hourText = hourText + " Fourty Four";
+                    break;
+                case 45:
+                    hourText = hourText + " Fourty Five";
+                    break;
+                case 46:
+                    hourText = hourText + " Fourty Six";
+                    break;
+                case 47:
+                    hourText = hourText + " Fourty Seven";
+                    break;
+                case 48:
+                    hourText = hourText + " Fourty Eight";
+                    break;
+                case 49:
+                    hourText = hourText + " Fourty Nine";
+                    break;
+                case 50:
+                    hourText = hourText + " Fifty";
+                    break;
+                case 51:
+                    hourText = hourText + " Fifty One";
+                    break;
+                case 52:
+                    hourText = hourText + " Fifty Two";
+                    break;
+                case 53:
+                    hourText = hourText + " Fifty Three";
+                    break;
+                case 54:
+                    hourText = hourText + " Fifty Four";
+                    break;
+                case 55:
+                    hourText = hourText + " Fifty Five";
+                    break;
+                case 56:
+                    hourText = hourText + " Fifty Six";
+                    break;
+                case 57:
+                    hourText = hourText + " Fifty Seven";
+                    break;
+                case 58:
+                    hourText = hourText + " Fifty Eight";
+                    break;
+                case 59:
+                    hourText = hourText + " Fifty Nine";
+                    break;
             }
             textClock.Text = hourText;
         }
@@ -503,20 +646,47 @@ namespace ShockClock
             }
         }
 
-        #region Audio input
-        /// <summary>
-        /// Stub recording callback function
-        /// </summary>
-        /// <param name="handle">Handle of the recording stream</param>
-        /// <param name="buffer">Recording buffer</param>
-        /// <param name="length">Length of buffer</param>
-        /// <param name="user">User parameters</param>
-        /// <returns></returns>
-        private static bool RecordHandler(int handle, IntPtr buffer, int length, IntPtr user)
+        private void StudioLightOn(object sender, EventArgs e)
         {
-            return true;
+            Dispatcher.Invoke(new Action(() =>
+            {
+                BrushConverter brushConverter = new BrushConverter();
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FF00CC00");
+                studioLight.Fill = brush;
+            }));
         }
 
+        private void StudioLightOff(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                BrushConverter brushConverter = new BrushConverter();
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FF003300");
+                studioLight.Fill = brush;
+            }));
+        }
+
+        private void EmergencyLightOn(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                BrushConverter brushConverter = new BrushConverter();
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FFFFCC00");
+                emergencyLight.Fill = brush;
+            }));
+        }
+
+        private void EmergencyLightOff(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                BrushConverter brushConverter = new BrushConverter();
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FF663300");
+                emergencyLight.Fill = brush;
+            }));
+        }
+
+        #region Audio input
         /// <summary>
         /// Triggers event sending peak level meter values
         /// </summary>
