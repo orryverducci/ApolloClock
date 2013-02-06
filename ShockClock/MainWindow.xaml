@@ -95,8 +95,8 @@
             </StackPanel>
         </Viewbox>
         <TextBlock x:Name="textClock" HorizontalAlignment="Center" Margin="0,14" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="54" Grid.Column="1" />
-        <Rectangle x:Name="leftMetre" Fill="#FFA5E41E" HorizontalAlignment="Left" Margin="10,0,0,100" Width="40" VerticalAlignment="Bottom" Grid.Row="1"/>
-        <Rectangle x:Name="rightMetre" Fill="#FFA5E41E" HorizontalAlignment="Left" Margin="60,0,0,100" Width="40" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <Rectangle x:Name="leftMetre" Fill="#FFA5E41E" HorizontalAlignment="Left" Margin="10,0,0,100" Width="40" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
+        <Rectangle x:Name="rightMetre" Fill="#FFA5E41E" HorizontalAlignment="Left" Margin="60,0,0,100" Width="40" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
         <TextBlock HorizontalAlignment="Right" Margin="0,10,0,0" TextWrapping="Wrap" Text="Output Levels" VerticalAlignment="Top" Foreground="White" FontSize="26" TextAlignment="Center"/>
         <ContentControl Template="{StaticResource ShockLogo}" Content="ContentControl" HorizontalAlignment="Center" Margin="22,10,12,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Grid Grid.Column="2" Margin="0" Grid.RowSpan="2">

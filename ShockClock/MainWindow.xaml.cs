@@ -32,6 +32,7 @@ namespace ShockClock
         /// </summary>
         private int currentSecond;
         private int recordingHandle; // Handle of the recording stream
+        private RECORDPROC recordProc = new RECORDPROC(RecordHandler); // Recording Callback
         private DSP_PeakLevelMeter peakLevelMeter; // Peak Level Meter
         private LightsControl lightsControl = new LightsControl();
 
@@ -61,7 +62,7 @@ namespace ShockClock
                 throw new ApplicationException();
             }
             // Start recording
-            recordingHandle = Bass.BASS_RecordStart(44100, 2, BASSFlag.BASS_SAMPLE_FLOAT, null, IntPtr.Zero);
+            recordingHandle = Bass.BASS_RecordStart(44100, 2, BASSFlag.BASS_SAMPLE_FLOAT, recordProc, IntPtr.Zero);
             // Add Peak Level Meter DSP and Event Handler
             peakLevelMeter = new DSP_PeakLevelMeter(recordingHandle, 1);
             peakLevelMeter.Notification += new EventHandler(PeakLevelMeterNotification);
@@ -687,6 +688,19 @@ namespace ShockClock
         }
 
         #region Audio input
+        /// <summary> 	
+        /// Stub recording callback function
+        /// </summary>
+        /// <param name="handle">Handle of the recording stream</param>
+        /// <param name="buffer">Recording buffer</param>
+        /// <param name="length">Length of buffer</param>
+        /// <param name="user">User parameters</param>
+        /// <returns></returns>
+        private static bool RecordHandler(int handle, IntPtr buffer, int length, IntPtr user)
+        {
+            return true;
+        }
+
         /// <summary>
         /// Triggers event sending peak level meter values
         /// </summary>
