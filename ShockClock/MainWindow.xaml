@@ -9,7 +9,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="130"/>
         </Grid.RowDefinitions>
         <Viewbox Margin="0" Grid.Column="0">
             <Canvas Height="206" Width="206" Margin="5">
@@ -93,7 +93,7 @@
                <TextBlock x:Name="secondsClock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Foreground="Red" FontFamily="Segoe UI Semibold" FontSize="30" FontWeight="Bold" Margin="0,-14,0,0" Width="206" TextAlignment="Center"/>
             </StackPanel>
         </Viewbox>
-        <TextBlock x:Name="textClock" HorizontalAlignment="Center" Margin="0,14" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="54" Grid.Column="0" />
+        <TextBlock x:Name="textClock" HorizontalAlignment="Center" Margin="0,14" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="72" Grid.Column="0" />
         <Grid Grid.Column="1" Margin="0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
