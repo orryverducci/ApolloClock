@@ -32,40 +32,11 @@ namespace ShockClock
         /// </summary>
         private int currentSecond;
         private int recordingHandle; // Handle of the recording stream
-        private RECORDPROC recordProc = new RECORDPROC(RecordHandler); // Recording Callback
-        private DSP_PeakLevelMeter peakLevelMeter; // Peak Level Meter
         private LightsControl lightsControl = new LightsControl();
 
         public MainWindow()
         {
             InitializeComponent();
-            BassNet.Registration("orry@orryverducci.co.uk", "2X24373423243720");
-            // Set dll locations
-            if (IntPtr.Size == 8) // If running in 64 bit
-            {
-                Bass.LoadMe("x64");
-            }
-            else // Else if running in 32 bit
-            {
-                Bass.LoadMe("x86");
-            }
-            // Initialise BASS
-            if (!Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, System.IntPtr.Zero)) // If unable to initialise
-            {
-                // Throw exception
-                throw new ApplicationException();
-            }
-            // Initialise audio input
-            if (!Bass.BASS_RecordInit(-1)) // If unable to initialise default input device
-            {
-                // Throw exception
-                throw new ApplicationException();
-            }
-            // Start recording
-            recordingHandle = Bass.BASS_RecordStart(44100, 2, BASSFlag.BASS_SAMPLE_FLOAT, recordProc, IntPtr.Zero);
-            // Add Peak Level Meter DSP and Event Handler
-            peakLevelMeter = new DSP_PeakLevelMeter(recordingHandle, 1);
-            peakLevelMeter.Notification += new EventHandler(PeakLevelMeterNotification);
             // Set initial UI state
             UpdateClock(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             for (int i = 0; i <= DateTime.Now.Second; i++)
@@ -709,40 +680,9 @@ namespace ShockClock
             }));
         }
 
-        #region Audio input
-        /// <summary> 	
-        /// Stub recording callback function
-        /// </summary>
-        /// <param name="handle">Handle of the recording stream</param>
-        /// <param name="buffer">Recording buffer</param>
-        /// <param name="length">Length of buffer</param>
-        /// <param name="user">User parameters</param>
-        /// <returns></returns>
-        private static bool RecordHandler(int handle, IntPtr buffer, int length, IntPtr user)
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// Triggers event sending peak level meter values
-        /// </summary>
-        /// <param name="sender">Sending Object</param>
-        /// <param name="e">Event argument</param>
-        public void PeakLevelMeterNotification(object sender, EventArgs e)
-        {
-            Dispatcher.Invoke(new Action(() =>
-                {
-                    double height = ((Panel)Application.Current.MainWindow.Content).ActualHeight - 189;
-                    leftMetre.Height = Math.Pow(10, peakLevelMeter.LevelL_dBV / 20) * height;
-                    rightMetre.Height = Math.Pow(10, peakLevelMeter.LevelR_dBV / 20) * height;
-                }));
-        }
-        #endregion
-
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
         {
             timer.Elapsed -= timer_Elapsed;
-            peakLevelMeter.Notification -= PeakLevelMeterNotification;
         }
 
         private void Window_StateChanged_1(object sender, EventArgs e)

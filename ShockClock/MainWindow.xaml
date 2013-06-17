@@ -4,7 +4,6 @@
         Title="ShockClock" Height="350" Width="525" Background="Black" Closing="Window_Closing_1" StateChanged="Window_StateChanged_1" PreviewKeyDown="Window_PreviewKeyDown_1" Icon="icon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="300*"/>
             <ColumnDefinition Width="120*"/>
         </Grid.ColumnDefinitions>
@@ -12,7 +11,7 @@
             <RowDefinition/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Viewbox Margin="0" Grid.Column="1">
+        <Viewbox Margin="0" Grid.Column="0">
             <Canvas Height="206" Width="206" Margin="5">
                 <Ellipse x:Name="secondDot0" Fill="Red" Height="6" Canvas.Left="100" Canvas.Top="0" Width="6"/>
                 <Ellipse x:Name="secondDot1" Fill="Red" Height="6" Canvas.Left="110.45" Canvas.Top="0.54" Width="6"/>
@@ -88,18 +87,14 @@
                 <Ellipse x:Name="innerDot12" Fill="Red" Height="6" Canvas.Left="55" Canvas.Top="22.05" Width="6"/>
             </Canvas>
         </Viewbox>
-        <Viewbox Margin="0" Grid.Column="1">
+        <Viewbox Margin="0" Grid.Column="0">
             <StackPanel Height="206" Width="206">
                <TextBlock x:Name="mainClock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Foreground="Red" FontFamily="Segoe UI Semibold" FontSize="48" FontWeight="Bold" Margin="0,55,0,0" Width="206" TextAlignment="Center"/>
                <TextBlock x:Name="secondsClock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Foreground="Red" FontFamily="Segoe UI Semibold" FontSize="30" FontWeight="Bold" Margin="0,-14,0,0" Width="206" TextAlignment="Center"/>
             </StackPanel>
         </Viewbox>
-        <TextBlock x:Name="textClock" HorizontalAlignment="Center" Margin="0,14" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="54" Grid.Column="1" />
-        <Rectangle x:Name="leftMetre" Fill="#FFA5E41E" HorizontalAlignment="Left" Margin="10,0,0,100" Width="40" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
-        <Rectangle x:Name="rightMetre" Fill="#FFA5E41E" HorizontalAlignment="Left" Margin="60,0,0,100" Width="40" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
-        <TextBlock HorizontalAlignment="Right" Margin="0,10,0,0" TextWrapping="Wrap" Text="Output Levels" VerticalAlignment="Top" Foreground="White" FontSize="26" TextAlignment="Center"/>
-        <ContentControl Template="{StaticResource ShockLogo}" Content="ContentControl" HorizontalAlignment="Center" Margin="22,10,12,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Grid Grid.Column="2" Margin="0" Grid.RowSpan="2">
+        <TextBlock x:Name="textClock" HorizontalAlignment="Center" Margin="0,14" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" FontSize="54" Grid.Column="0" />
+        <Grid Grid.Column="1" Margin="0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
