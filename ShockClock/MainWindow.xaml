@@ -110,7 +110,7 @@
             </Viewbox>
             <Viewbox Margin="2,0,0,0" Grid.Row="1">
                 <Canvas Height="100" Margin="0" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Rectangle x:Name="micLight" Canvas.Left="0" Canvas.Top="0" Width="120" Height="100" StrokeThickness="2" Fill="#FF660000"/>
+                    <Rectangle x:Name="micLight" Canvas.Left="0" Canvas.Top="0" Width="120" Height="100" StrokeThickness="2" Fill="#FF3A0000"/>
                 </Canvas>
             </Viewbox>
             <Viewbox Margin="2,0,0,0" Grid.Row="1">
@@ -118,7 +118,7 @@
             </Viewbox>
             <Viewbox Margin="2,0,0,0" Grid.Row="2">
                 <Canvas Height="100" Margin="0" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Rectangle x:Name="emergencyLight" Canvas.Left="0" Canvas.Top="0" Width="120" Height="100" StrokeThickness="2" Fill="#FF663300"/>
+                    <Rectangle x:Name="emergencyLight" Canvas.Left="0" Canvas.Top="0" Width="120" Height="100" StrokeThickness="2" Fill="#FF231100"/>
                 </Canvas>
             </Viewbox>
             <Viewbox Margin="2,0,0,0" Grid.Row="2">

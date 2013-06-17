@@ -637,7 +637,7 @@ namespace ShockClock
             Dispatcher.Invoke(new Action(() =>
             {
                 BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FF003300");
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FF001D00");
                 studioLight.Fill = brush;
             }));
         }
@@ -657,7 +657,7 @@ namespace ShockClock
             Dispatcher.Invoke(new Action(() =>
             {
                 BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FF660000");
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FF3A0000");
                 micLight.Fill = brush;
             }));
         }
@@ -677,7 +677,7 @@ namespace ShockClock
             Dispatcher.Invoke(new Action(() =>
             {
                 BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FF663300");
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FF231100");
                 emergencyLight.Fill = brush;
             }));
         }
