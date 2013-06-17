@@ -115,6 +115,9 @@ namespace ShockClock
             // Write text version of clock
             switch (hour)
             {
+                case 0:
+                    hourText = "Twelve";
+                    break;
                 case 1:
                     hourText = "One";
                     break;
