@@ -52,6 +52,16 @@ namespace ShockClock
         public event EventHandler StudioOffAir;
 
         /// <summary>
+        /// Event for when a mic goes live
+        /// </summary>
+        public event EventHandler MicLive;
+
+        /// <summary>
+        /// Event for when a mic is switched off
+        /// </summary>
+        public event EventHandler MicOff;
+
+        /// <summary>
         /// Event for when emergency output goes on air
         /// </summary>
         public event EventHandler EmergencyOn;
@@ -104,6 +114,18 @@ namespace ShockClock
                             if (StudioOffAir != null)
                             {
                                 StudioOffAir(this, new EventArgs());
+                            }
+                            break;
+                        case "MIC LIVE":
+                            if (MicLive != null)
+                            {
+                                MicLive(this, new EventArgs());
+                            }
+                            break;
+                        case "MIC OFF":
+                            if (MicOff != null)
+                            {
+                                MicOff(this, new EventArgs());
                             }
                             break;
                         case "EMERGENCY ON":

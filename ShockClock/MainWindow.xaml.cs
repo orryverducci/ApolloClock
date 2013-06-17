@@ -78,6 +78,8 @@ namespace ShockClock
             // Light Event Handlers
             lightsControl.StudioOnAir += new EventHandler(StudioLightOn);
             lightsControl.StudioOffAir += new EventHandler(StudioLightOff);
+            lightsControl.MicLive += new EventHandler(MicLightOn);
+            lightsControl.MicOff += new EventHandler(MicLightOff);
             lightsControl.EmergencyOn += new EventHandler(EmergencyLightOn);
             lightsControl.EmergencyOff += new EventHandler(EmergencyLightOff);
         }
@@ -664,6 +666,26 @@ namespace ShockClock
                 BrushConverter brushConverter = new BrushConverter();
                 Brush brush = (Brush)brushConverter.ConvertFrom("#FF003300");
                 studioLight.Fill = brush;
+            }));
+        }
+
+        private void MicLightOn(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                BrushConverter brushConverter = new BrushConverter();
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FFFF0000");
+                micLight.Fill = brush;
+            }));
+        }
+
+        private void MicLightOff(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                BrushConverter brushConverter = new BrushConverter();
+                Brush brush = (Brush)brushConverter.ConvertFrom("#FF660000");
+                micLight.Fill = brush;
             }));
         }
 
