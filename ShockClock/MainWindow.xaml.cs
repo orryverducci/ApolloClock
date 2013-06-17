@@ -231,7 +231,7 @@ namespace ShockClock
                     hourText = hourText + " Eleven";
                     break;
                 case 12:
-                    hourText = hourText + " Twleve";
+                    hourText = hourText + " Twelve";
                     break;
                 case 13:
                     hourText = hourText + " Thirteen";
