@@ -31,7 +31,6 @@ namespace ShockClock
         /// The value of the current second
         /// </summary>
         private int currentSecond;
-        private int recordingHandle; // Handle of the recording stream
         private LightsControl lightsControl = new LightsControl();
 
         public MainWindow()
