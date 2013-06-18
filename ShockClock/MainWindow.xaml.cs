@@ -31,12 +31,13 @@ namespace ShockClock
         /// The value of the current second
         /// </summary>
         private int currentSecond;
-        private LightsControl lightsControl = new LightsControl();
 
-        public MainWindow()
+        public MainWindow(int studioNumber)
         {
+
             InitializeComponent();
             // Set initial UI state
+            Title = "Studio " + studioNumber.ToString() + " - ShockClock";
             UpdateClock(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             for (int i = 0; i <= DateTime.Now.Second; i++)
             {
@@ -46,18 +47,16 @@ namespace ShockClock
             timer.Elapsed += timer_Elapsed;
             timer.Start();
             // Light Event Handlers
-            lightsControl.StudioOnAir += new EventHandler(StudioLightOn);
-            lightsControl.StudioOffAir += new EventHandler(StudioLightOff);
-            lightsControl.MicLive += new EventHandler(MicLightOn);
-            lightsControl.MicOff += new EventHandler(MicLightOff);
-            lightsControl.EmergencyOn += new EventHandler(EmergencyLightOn);
-            lightsControl.EmergencyOff += new EventHandler(EmergencyLightOff);
+            LightsControl.StudioOnAir += new EventHandler(StudioLightOn);
+            LightsControl.StudioOffAir += new EventHandler(StudioLightOff);
+            LightsControl.MicLive += new EventHandler(MicLightOn);
+            LightsControl.MicOff += new EventHandler(MicLightOff);
+            LightsControl.EmergencyOn += new EventHandler(EmergencyLightOn);
+            LightsControl.EmergencyOff += new EventHandler(EmergencyLightOff);
         }
 
         ~MainWindow()
         {
-            // Kill sockets
-            lightsControl.Stop();
             // Stop timer
             timer.Stop();
         }
@@ -707,6 +706,12 @@ namespace ShockClock
             {
                 WindowState = WindowState.Normal;
             }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            StudioSettingsWindow settingsWindow = new StudioSettingsWindow();
+            settingsWindow.ShowDialog();
         }
     }
 }

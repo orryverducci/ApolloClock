@@ -127,4 +127,9 @@
         </Grid>
 
     </Grid>
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Studio Settings" Click="MenuItem_Click"/>
+        </ContextMenu>
+    </Window.ContextMenu>
 </Window>

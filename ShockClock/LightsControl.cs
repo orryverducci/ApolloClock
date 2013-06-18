@@ -9,69 +9,69 @@ using System.Threading.Tasks;
 
 namespace ShockClock
 {
-    class LightsControl
+    static class LightsControl
     {
         /// <summary>
         /// Listens for TCP connections from any network interface on port 7000
         /// </summary>
-        private TcpListener listener = new TcpListener(System.Net.IPAddress.Any, 7000);
+        static private TcpListener listener = new TcpListener(System.Net.IPAddress.Any, 7000);
 
         /// <summary>
         /// Thread to carry out client tasks
         /// </summary>
-        private Thread serviceThread;
+        static private Thread serviceThread;
 
         /// <summary>
         /// Socket used for client connection
         /// </summary>
-        private Socket clientSocket;
+        static private Socket clientSocket;
 
         /// <summary>
         /// Stream used for network communcation
         /// </summary>
-        private Stream communicationStream;
+        static private Stream communicationStream;
 
         /// <summary>
         /// Stream reader for communication stream
         /// </summary>
-        private StreamReader streamReader;
+        static private StreamReader streamReader;
 
         /// <summary>
         /// Stream write for communcation stream
         /// </summary>
-        private StreamWriter streamWriter;
+        static private StreamWriter streamWriter;
 
         /// <summary>
         /// Event for when the studio comes on air
         /// </summary>
-        public event EventHandler StudioOnAir;
+        static public event EventHandler StudioOnAir;
 
         /// <summary>
         /// Event for when the studio goes off air
         /// </summary>
-        public event EventHandler StudioOffAir;
+        static public event EventHandler StudioOffAir;
 
         /// <summary>
         /// Event for when a mic goes live
         /// </summary>
-        public event EventHandler MicLive;
+        static public event EventHandler MicLive;
 
         /// <summary>
         /// Event for when a mic is switched off
         /// </summary>
-        public event EventHandler MicOff;
+        static public event EventHandler MicOff;
 
         /// <summary>
         /// Event for when emergency output goes on air
         /// </summary>
-        public event EventHandler EmergencyOn;
+        static public event EventHandler EmergencyOn;
 
         /// <summary>
         /// Event for when emergency output goes off air
         /// </summary>
-        public event EventHandler EmergencyOff;
+        static public event EventHandler EmergencyOff;
 
-        public LightsControl()
+        static public void Initialise()
         {
             // Start listening for connections
             listener.Start();
@@ -80,12 +80,12 @@ namespace ShockClock
             serviceThread.Start();
         }
 
-        public void Stop()
+        static public void Stop()
         {
             serviceThread.Abort();
         }
 
-        private void RemoteService()
+        static private void RemoteService()
         {
             while (true)
             {
@@ -107,37 +107,37 @@ namespace ShockClock
                         case "STUDIO ON":
                             if (StudioOnAir != null)
                             {
-                                StudioOnAir(this, new EventArgs());
+                                StudioOnAir(null, new EventArgs());
                             }
                             break;
                         case "STUDIO OFF":
                             if (StudioOffAir != null)
                             {
-                                StudioOffAir(this, new EventArgs());
+                                StudioOffAir(null, new EventArgs());
                             }
                             break;
                         case "MIC LIVE":
                             if (MicLive != null)
                             {
-                                MicLive(this, new EventArgs());
+                                MicLive(null, new EventArgs());
                             }
                             break;
                         case "MIC OFF":
                             if (MicOff != null)
                             {
-                                MicOff(this, new EventArgs());
+                                MicOff(null, new EventArgs());
                             }
                             break;
                         case "EMERGENCY ON":
                             if (EmergencyOn != null)
                             {
-                                EmergencyOn(this, new EventArgs());
+                                EmergencyOn(null, new EventArgs());
                             }
                             break;
                         case "EMERGENCY OFF":
                             if (EmergencyOff != null)
                             {
-                                EmergencyOff(this, new EventArgs());
+                                EmergencyOff(null, new EventArgs());
                             }
                             break;
                         case "EXIT":
