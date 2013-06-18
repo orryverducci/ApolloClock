@@ -19,12 +19,17 @@ namespace ShockClock
         /// The value of the current second
         /// </summary>
         private int currentSecond;
+        /// <summary>
+        /// The current studio number
+        /// </summary>
+        private int studio;
 
         public MainWindow(int studioNumber)
         {
 
             InitializeComponent();
             // Set initial UI state
+            studio = studioNumber;
             Title = "Studio " + studioNumber.ToString() + " - ShockClock";
             UpdateClock(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             for (int i = 0; i <= DateTime.Now.Second; i++)
@@ -35,12 +40,12 @@ namespace ShockClock
             timer.Elapsed += timer_Elapsed;
             timer.Start();
             // Light Event Handlers
-            LightsControl.StudioOnAir += new EventHandler(StudioLightOn);
-            LightsControl.StudioOffAir += new EventHandler(StudioLightOff);
-            LightsControl.MicLive += new EventHandler(MicLightOn);
-            LightsControl.MicOff += new EventHandler(MicLightOff);
-            LightsControl.EmergencyOn += new EventHandler(EmergencyLightOn);
-            LightsControl.EmergencyOff += new EventHandler(EmergencyLightOff);
+            LightsControl.StudioOnAir += new StudioEventHandler(StudioLightOn);
+            LightsControl.StudioOffAir += new StudioEventHandler(StudioLightOff);
+            LightsControl.MicLive += new StudioEventHandler(MicLightOn);
+            LightsControl.MicOff += new StudioEventHandler(MicLightOff);
+            LightsControl.EmergencyOn += new StudioEventHandler(EmergencyLightOn);
+            LightsControl.EmergencyOff += new StudioEventHandler(EmergencyLightOff);
         }
 
         ~MainWindow()
@@ -609,64 +614,82 @@ namespace ShockClock
             }
         }
 
-        private void StudioLightOn(object sender, EventArgs e)
+        private void StudioLightOn(object sender, StudioEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() =>
+            if (studio == e.StudioNumber)
             {
-                BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FF00CC00");
-                studioLight.Fill = brush;
-            }));
+                Dispatcher.Invoke(new Action(() =>
+                    {
+                        BrushConverter brushConverter = new BrushConverter();
+                        Brush brush = (Brush) brushConverter.ConvertFrom("#FF00CC00");
+                        studioLight.Fill = brush;
+                    }));
+            }
         }
 
-        private void StudioLightOff(object sender, EventArgs e)
+        private void StudioLightOff(object sender, StudioEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() =>
+            if (studio == e.StudioNumber)
             {
-                BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FF001D00");
-                studioLight.Fill = brush;
-            }));
+                Dispatcher.Invoke(new Action(() =>
+                    {
+                        BrushConverter brushConverter = new BrushConverter();
+                        Brush brush = (Brush) brushConverter.ConvertFrom("#FF001D00");
+                        studioLight.Fill = brush;
+                    }));
+            }
         }
 
-        private void MicLightOn(object sender, EventArgs e)
+        private void MicLightOn(object sender, StudioEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() =>
+            if (studio == e.StudioNumber)
             {
-                BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FFFF0000");
-                micLight.Fill = brush;
-            }));
+                Dispatcher.Invoke(new Action(() =>
+                    {
+                        BrushConverter brushConverter = new BrushConverter();
+                        Brush brush = (Brush) brushConverter.ConvertFrom("#FFFF0000");
+                        micLight.Fill = brush;
+                    }));
+            }
         }
 
-        private void MicLightOff(object sender, EventArgs e)
+        private void MicLightOff(object sender, StudioEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() =>
+            if (studio == e.StudioNumber)
             {
-                BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FF3A0000");
-                micLight.Fill = brush;
-            }));
+                Dispatcher.Invoke(new Action(() =>
+                    {
+                        BrushConverter brushConverter = new BrushConverter();
+                        Brush brush = (Brush) brushConverter.ConvertFrom("#FF3A0000");
+                        micLight.Fill = brush;
+                    }));
+            }
         }
 
-        private void EmergencyLightOn(object sender, EventArgs e)
+        private void EmergencyLightOn(object sender, StudioEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() =>
+            if (studio == e.StudioNumber)
             {
-                BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FFFFCC00");
-                emergencyLight.Fill = brush;
-            }));
+                Dispatcher.Invoke(new Action(() =>
+                    {
+                        BrushConverter brushConverter = new BrushConverter();
+                        Brush brush = (Brush) brushConverter.ConvertFrom("#FFFFCC00");
+                        emergencyLight.Fill = brush;
+                    }));
+            }
         }
 
-        private void EmergencyLightOff(object sender, EventArgs e)
+        private void EmergencyLightOff(object sender, StudioEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() =>
+            if (studio == e.StudioNumber)
             {
-                BrushConverter brushConverter = new BrushConverter();
-                Brush brush = (Brush)brushConverter.ConvertFrom("#FF231100");
-                emergencyLight.Fill = brush;
-            }));
+                Dispatcher.Invoke(new Action(() =>
+                    {
+                        BrushConverter brushConverter = new BrushConverter();
+                        Brush brush = (Brush) brushConverter.ConvertFrom("#FF231100");
+                        emergencyLight.Fill = brush;
+                    }));
+            }
         }
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)

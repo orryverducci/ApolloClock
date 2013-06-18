@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="StudioEventArgs.cs" />
     <Compile Include="StudioSettingsWindow.xaml.cs">
       <DependentUpon>StudioSettingsWindow.xaml</DependentUpon>
     </Compile>
