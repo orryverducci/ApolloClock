@@ -40,12 +40,10 @@ namespace ShockClock
             timer.Elapsed += timer_Elapsed;
             timer.Start();
             // Light Event Handlers
-            LightsControl.StudioOnAir += new StudioEventHandler(StudioLightOn);
-            LightsControl.StudioOffAir += new StudioEventHandler(StudioLightOff);
+            LightsControl.StudioOnAir += new StudioEventHandler(StudioChange);
             LightsControl.MicLive += new StudioEventHandler(MicLightOn);
             LightsControl.MicOff += new StudioEventHandler(MicLightOff);
-            LightsControl.EmergencyOn += new StudioEventHandler(EmergencyLightOn);
-            LightsControl.EmergencyOff += new StudioEventHandler(EmergencyLightOff);
+            LightsControl.EmergencyOn += new EventHandler(EmergencyOn);
         }
 
         ~MainWindow()
@@ -614,7 +612,7 @@ namespace ShockClock
             }
         }
 
-        private void StudioLightOn(object sender, StudioEventArgs e)
+        private void StudioChange(object sender, StudioEventArgs e)
         {
             if (studio == e.StudioNumber)
             {
@@ -625,19 +623,21 @@ namespace ShockClock
                         studioLight.Fill = brush;
                     }));
             }
-        }
-
-        private void StudioLightOff(object sender, StudioEventArgs e)
-        {
-            if (studio == e.StudioNumber)
+            else
             {
                 Dispatcher.Invoke(new Action(() =>
                     {
                         BrushConverter brushConverter = new BrushConverter();
-                        Brush brush = (Brush) brushConverter.ConvertFrom("#FF001D00");
+                        Brush brush = (Brush)brushConverter.ConvertFrom("#FF001D00");
                         studioLight.Fill = brush;
                     }));
             }
+            Dispatcher.Invoke(new Action(() =>
+                {
+                    BrushConverter brushConverter = new BrushConverter();
+                    Brush brush = (Brush)brushConverter.ConvertFrom("#FF231100");
+                    emergencyLight.Fill = brush;
+                }));
         }
 
         private void MicLightOn(object sender, StudioEventArgs e)
@@ -666,30 +666,17 @@ namespace ShockClock
             }
         }
 
-        private void EmergencyLightOn(object sender, StudioEventArgs e)
+        private void EmergencyOn(object sender, EventArgs e)
         {
-            if (studio == e.StudioNumber)
-            {
-                Dispatcher.Invoke(new Action(() =>
-                    {
-                        BrushConverter brushConverter = new BrushConverter();
-                        Brush brush = (Brush) brushConverter.ConvertFrom("#FFFFCC00");
-                        emergencyLight.Fill = brush;
-                    }));
-            }
-        }
-
-        private void EmergencyLightOff(object sender, StudioEventArgs e)
-        {
-            if (studio == e.StudioNumber)
-            {
-                Dispatcher.Invoke(new Action(() =>
-                    {
-                        BrushConverter brushConverter = new BrushConverter();
-                        Brush brush = (Brush) brushConverter.ConvertFrom("#FF231100");
-                        emergencyLight.Fill = brush;
-                    }));
-            }
+            Dispatcher.Invoke(new Action(() =>
+                {
+                    BrushConverter emergencyBrushConverter = new BrushConverter();
+                    Brush emergencyBrush = (Brush)emergencyBrushConverter.ConvertFrom("#FFFFCC00");
+                    emergencyLight.Fill = emergencyBrush;
+                    BrushConverter studioBrushConverter = new BrushConverter();
+                    Brush studioBrush = (Brush)studioBrushConverter.ConvertFrom("#FF001D00");
+                    studioLight.Fill = studioBrush;
+                }));
         }
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)

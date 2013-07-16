@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using NetworkCommsDotNet;
 
 namespace ShockClock
@@ -6,14 +7,9 @@ namespace ShockClock
     static class LightsControl
     {
         /// <summary>
-        /// Event for when the studio comes on air
+        /// Event for when a studio comes on air
         /// </summary>
         static public event StudioEventHandler StudioOnAir;
-
-        /// <summary>
-        /// Event for when the studio goes off air
-        /// </summary>
-        static public event StudioEventHandler StudioOffAir;
 
         /// <summary>
         /// Event for when a mic goes live
@@ -28,12 +24,7 @@ namespace ShockClock
         /// <summary>
         /// Event for when emergency output goes on air
         /// </summary>
-        static public event StudioEventHandler EmergencyOn;
-
-        /// <summary>
-        /// Event for when emergency output goes off air
-        /// </summary>
-        static public event StudioEventHandler EmergencyOff;
+        static public event EventHandler EmergencyOn;
 
         static public void Initialise()
         {
@@ -50,49 +41,53 @@ namespace ShockClock
 
         static private void IncomingMessage(PacketHeader header, Connection connection, string message)
         {
-            // Parse command and studio number from received message
-            string[] commandParts = message.Split('-');
-            int studioNumber = Int32.Parse(commandParts[0]);
-            string command = commandParts[1];
+            // Parse studio number
+            int studioNumber = ParseStudioNumber(message);
             // Execute action for each command
-            switch (command)
+            if (message == "EMERGENCY") // If emergency output has come on
             {
-                case "STUDIO ON":
-                    if (StudioOnAir != null)
-                    {
-                        StudioOnAir(null, new StudioEventArgs(studioNumber));
-                    }
-                    break;
-                case "STUDIO OFF":
-                    if (StudioOffAir != null)
-                    {
-                        StudioOffAir(null, new StudioEventArgs(studioNumber));
-                    }
-                    break;
-                case "MIC LIVE":
-                    if (MicLive != null)
-                    {
-                        MicLive(null, new StudioEventArgs(studioNumber));
-                    }
-                    break;
-                case "MIC OFF":
-                    if (MicOff != null)
-                    {
-                        MicOff(null, new StudioEventArgs(studioNumber));
-                    }
-                    break;
-                case "EMERGENCY ON":
-                    if (EmergencyOn != null)
-                    {
-                        EmergencyOn(null, new StudioEventArgs(studioNumber));
-                    }
-                    break;
-                case "EMERGENCY OFF":
-                    if (EmergencyOff != null)
-                    {
-                        EmergencyOff(null, new StudioEventArgs(studioNumber));
-                    }
-                    break;
+                if (EmergencyOn != null)
+                {
+                    EmergencyOn(null, new EventArgs());
+                }
+            }
+            else if (message.StartsWith("STUDIO"))
+            {
+                if (StudioOnAir != null)
+                {
+                    StudioOnAir(null, new StudioEventArgs(studioNumber));
+                }
+            }
+            else if (message.StartsWith("MIC LIVE"))
+            {
+                if (MicLive != null)
+                {
+                    MicLive(null, new StudioEventArgs(studioNumber));
+                }
+            }
+            else if (message.StartsWith("MIC OFF"))
+            {
+                if (MicOff != null)
+                {
+                    MicOff(null, new StudioEventArgs(studioNumber));
+                }
+            }
+        }
+
+        static private int ParseStudioNumber(string command)
+        {
+            Debug.WriteLine(command);
+            // Split command if possible
+            string[] commandParts = command.Split('-');
+            // If command has been split, parse studio number
+            if (commandParts.Length > 1)
+            {
+                Debug.WriteLine(commandParts[1]);
+                return Int32.Parse(commandParts[1]);
+            }
+            else
+            {
+                return default(int);
             }
         }
     }
