@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NetworkCommsDotNet;
 using SharpDX;
 using SharpDX.DirectInput;
 
@@ -38,6 +39,7 @@ namespace MicLive
             else
             {
                 stopInput = true;
+                NetworkComms.Shutdown();
             }
         }
 
@@ -121,11 +123,13 @@ namespace MicLive
 
         private void MicLive()
         {
+            NetworkComms.SendObject("Message", ipTextBox.Text, 10000, "MIC LIVE - 1");
             statusPanel.BackColor = System.Drawing.Color.Red;
         }
 
         private void MicOff()
         {
+            NetworkComms.SendObject("Message", ipTextBox.Text, 10000, "MIC OFF - 1");
             statusPanel.BackColor = System.Drawing.Color.Maroon;
         }
     }
