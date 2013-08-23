@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShockClock", "ShockClock\ShockClock.csproj", "{D077C8B3-E225-40D9-AD9B-F375EBC91276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicLive", "MicLive\MicLive.csproj", "{0D4B4E31-0961-4FB0-BBA7-2FCD29140357}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{D077C8B3-E225-40D9-AD9B-F375EBC91276}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D077C8B3-E225-40D9-AD9B-F375EBC91276}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D077C8B3-E225-40D9-AD9B-F375EBC91276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D4B4E31-0961-4FB0-BBA7-2FCD29140357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D4B4E31-0961-4FB0-BBA7-2FCD29140357}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D4B4E31-0961-4FB0-BBA7-2FCD29140357}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D4B4E31-0961-4FB0-BBA7-2FCD29140357}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
