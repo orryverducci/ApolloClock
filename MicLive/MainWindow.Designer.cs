@@ -35,13 +35,15 @@
             this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ipLabel = new System.Windows.Forms.Label();
-            this.ipTextBox = new System.Windows.Forms.MaskedTextBox();
             this.inputLabel = new System.Windows.Forms.Label();
             this.inputComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.statusPanel = new System.Windows.Forms.Panel();
             this.statusLabel = new System.Windows.Forms.Label();
             this.statusTitleLabel = new System.Windows.Forms.Label();
+            this.ipTextBox = new System.Windows.Forms.TextBox();
+            this.studioComboBox = new System.Windows.Forms.ComboBox();
+            this.studioLabel = new System.Windows.Forms.Label();
             this.iconMenuStrip.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.statusPanel.SuspendLayout();
@@ -81,17 +83,9 @@
             this.ipLabel.AutoSize = true;
             this.ipLabel.Location = new System.Drawing.Point(12, 15);
             this.ipLabel.Name = "ipLabel";
-            this.ipLabel.Size = new System.Drawing.Size(47, 13);
+            this.ipLabel.Size = new System.Drawing.Size(59, 13);
             this.ipLabel.TabIndex = 1;
-            this.ipLabel.Text = "Clock IP";
-            // 
-            // ipTextBox
-            // 
-            this.ipTextBox.Location = new System.Drawing.Point(86, 12);
-            this.ipTextBox.Mask = "990.990.990.990";
-            this.ipTextBox.Name = "ipTextBox";
-            this.ipTextBox.Size = new System.Drawing.Size(286, 20);
-            this.ipTextBox.TabIndex = 2;
+            this.ipLabel.Text = "Clock Host";
             // 
             // inputLabel
             // 
@@ -120,7 +114,7 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.03082F));
             this.tableLayoutPanel.Controls.Add(this.statusPanel, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.statusTitleLabel, 0, 0);
-            this.tableLayoutPanel.Location = new System.Drawing.Point(15, 65);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(15, 92);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 1;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -161,16 +155,54 @@
             this.statusTitleLabel.Text = "Status";
             this.statusTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // ipTextBox
+            // 
+            this.ipTextBox.Location = new System.Drawing.Point(86, 12);
+            this.ipTextBox.Name = "ipTextBox";
+            this.ipTextBox.Size = new System.Drawing.Size(286, 20);
+            this.ipTextBox.TabIndex = 8;
+            // 
+            // studioComboBox
+            // 
+            this.studioComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.studioComboBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.studioComboBox.FormattingEnabled = true;
+            this.studioComboBox.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.studioComboBox.Location = new System.Drawing.Point(86, 65);
+            this.studioComboBox.Name = "studioComboBox";
+            this.studioComboBox.Size = new System.Drawing.Size(286, 21);
+            this.studioComboBox.TabIndex = 10;
+            // 
+            // studioLabel
+            // 
+            this.studioLabel.AutoSize = true;
+            this.studioLabel.Location = new System.Drawing.Point(12, 68);
+            this.studioLabel.Name = "studioLabel";
+            this.studioLabel.Size = new System.Drawing.Size(37, 13);
+            this.studioLabel.TabIndex = 9;
+            this.studioLabel.Text = "Studio";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CausesValidation = false;
-            this.ClientSize = new System.Drawing.Size(384, 175);
+            this.ClientSize = new System.Drawing.Size(384, 205);
+            this.Controls.Add(this.studioComboBox);
+            this.Controls.Add(this.studioLabel);
+            this.Controls.Add(this.ipTextBox);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.inputComboBox);
             this.Controls.Add(this.inputLabel);
-            this.Controls.Add(this.ipTextBox);
             this.Controls.Add(this.ipLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -194,13 +226,15 @@
         private System.Windows.Forms.ToolStripMenuItem openMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.Label ipLabel;
-        private System.Windows.Forms.MaskedTextBox ipTextBox;
         private System.Windows.Forms.Label inputLabel;
         private System.Windows.Forms.ComboBox inputComboBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.Panel statusPanel;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label statusTitleLabel;
+        private System.Windows.Forms.TextBox ipTextBox;
+        private System.Windows.Forms.ComboBox studioComboBox;
+        private System.Windows.Forms.Label studioLabel;
     }
 }
 

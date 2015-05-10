@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,8 +39,16 @@ namespace MicLive
             }
             else
             {
-                stopInput = true;
+                if (joystick != null)
+                {
+                    stopInput = true;
+                    joystick.Unacquire();
+                    joystick = null;
+                }
                 NetworkComms.Shutdown();
+                Properties.Settings.Default.HostName = ipTextBox.Text;
+                Properties.Settings.Default.InputDevice = (string)inputComboBox.SelectedItem;
+                Properties.Settings.Default.Studio = studioComboBox.SelectedIndex + 1;
             }
         }
 
@@ -67,6 +76,8 @@ namespace MicLive
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            ipTextBox.Text = Properties.Settings.Default.HostName;
+            studioComboBox.SelectedIndex = Properties.Settings.Default.Studio - 1;
             devices = (List<DeviceInstance>)directInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly);
             foreach (DeviceInstance device in devices)
             {
@@ -74,7 +85,15 @@ namespace MicLive
             }
             if (inputComboBox.Items.Count > 0)
             {
-                inputComboBox.SelectedIndex = 0;
+                int initialDevice = inputComboBox.FindStringExact(Properties.Settings.Default.InputDevice);
+                if (initialDevice != -1)
+                {
+                    inputComboBox.SelectedIndex = initialDevice;
+                }
+                else
+                {
+                    inputComboBox.SelectedIndex = 0;
+                }
             }
         }
 
@@ -105,7 +124,7 @@ namespace MicLive
                 var stateData = joystick.GetBufferedData();
                 foreach (var state in stateData)
                 {
-                    if (state.Offset == JoystickOffset.Buttons1)
+                    if (state.Offset == JoystickOffset.Buttons0)
                     {
                         if (state.Value > 0)
                         {
@@ -116,20 +135,35 @@ namespace MicLive
                             MicOff();
                         }
                     }
-                    Console.WriteLine(state);
                 }
             }
         }
 
         private void MicLive()
         {
-            NetworkComms.SendObject("Message", ipTextBox.Text, 10000, "MIC LIVE - 1");
+            try
+            {
+                studioComboBox.Invoke((MethodInvoker)(() =>
+                {
+                    IPAddress[] clockIP = Dns.GetHostAddresses(ipTextBox.Text);
+                    NetworkComms.SendObject("Message", clockIP[0].ToString(), 10000, "MIC LIVE - " + studioComboBox.Text);
+                }));
+            }
+            catch { }
             statusPanel.BackColor = System.Drawing.Color.Red;
         }
 
         private void MicOff()
         {
-            NetworkComms.SendObject("Message", ipTextBox.Text, 10000, "MIC OFF - 1");
+            try
+            {
+                studioComboBox.Invoke((MethodInvoker)(() =>
+                {
+                    IPAddress[] clockIP = Dns.GetHostAddresses(ipTextBox.Text);
+                    NetworkComms.SendObject("Message", clockIP[0].ToString(), 10000, "MIC OFF - " + studioComboBox.Text);
+                }));
+            }
+            catch { }
             statusPanel.BackColor = System.Drawing.Color.Maroon;
         }
     }
