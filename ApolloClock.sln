@@ -18,7 +18,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Additional Items", "Additio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApolloClock.Windows", "ApolloClock.Windows\ApolloClock.Windows.csproj", "{1A14AAF6-B153-4079-AEC7-EA3220C3F13D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApolloClock.Core.Windows", "ApolloClock.Core.Windows\ApolloClock.Core.Windows.csproj", "{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ApolloClock.Core", "ApolloClock.Core\ApolloClock.Core.shproj", "{9342165A-84B2-490E-AE56-F49917DB3933}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ApolloClock.Core\ApolloClock.Core.projitems*{9342165a-84b2-490e-ae56-f49917db3933}*SharedItemsImports = 13
+		ApolloClock.Core\ApolloClock.Core.projitems*{6aac0d0b-8629-4505-a55d-d07fca7f64f5}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -79,6 +87,22 @@ Global
 		{1A14AAF6-B153-4079-AEC7-EA3220C3F13D}.Release|x86.ActiveCfg = Release|x86
 		{1A14AAF6-B153-4079-AEC7-EA3220C3F13D}.Release|x86.Build.0 = Release|x86
 		{1A14AAF6-B153-4079-AEC7-EA3220C3F13D}.Release|x86.Deploy.0 = Release|x86
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Debug|Any CPU.Build.0 = Debug|x86
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Debug|ARM.ActiveCfg = Debug|ARM
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Debug|ARM.Build.0 = Debug|ARM
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Debug|x64.ActiveCfg = Debug|x64
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Debug|x64.Build.0 = Debug|x64
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Debug|x86.ActiveCfg = Debug|x86
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Debug|x86.Build.0 = Debug|x86
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Release|Any CPU.ActiveCfg = Release|x86
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Release|Any CPU.Build.0 = Release|x86
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Release|ARM.ActiveCfg = Release|ARM
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Release|ARM.Build.0 = Release|ARM
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Release|x64.ActiveCfg = Release|x64
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Release|x64.Build.0 = Release|x64
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Release|x86.ActiveCfg = Release|x86
+		{6AAC0D0B-8629-4505-A55D-D07FCA7F64F5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
