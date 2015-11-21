@@ -8,6 +8,22 @@
     mc:Ignorable="d" Foreground="White" Background="Black" RequestedTheme="Dark">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="leftStackPanel" Margin="0" Grid.Row="1" Orientation="Horizontal" Grid.RowSpan="2"/>
+        <StackPanel x:Name="rightStackPanel" Grid.Column="2" Margin="0" Grid.RowSpan="4"/>
+        <StackPanel x:Name="topStackPanel" Margin="0" Grid.ColumnSpan="2"/>
+        <StackPanel x:Name="bottomStackPanel" Margin="0" Grid.Row="3" Grid.ColumnSpan="2"/>
+        <StackPanel x:Name="clockStackPanel" Grid.Column="1" Margin="0" Grid.Row="2"/>
 
     </Grid>
 </Page>
