@@ -9,5 +9,7 @@
     <Import_RootNamespace>ApolloClock.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ClockDisplay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IClock.cs" />
   </ItemGroup>
 </Project>
