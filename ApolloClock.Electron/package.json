@@ -1,0 +1,16 @@
+{
+  "name": "ApolloClock",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Digital clock and information display for broadcast studios",
+  "main": "app.js",
+  "author": {
+    "name": "Orry Verducci"
+  },
+  "dependencies": {
+    "electron-prebuilt": "^0.37.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

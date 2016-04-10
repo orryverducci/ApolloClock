@@ -1,0 +1,11 @@
+{
+  "name": "ApolloClock",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Digital clock and information display for broadcast studios",
+  "author": {
+    "name": "Orry Verducci"
+  },
+  "dependencies": {
+  }
+}
