@@ -1,0 +1,11 @@
+{
+  "name": "ApolloClock",
+  "description": "Digital clock and information display for broadcast studios",
+  "main": "",
+  "authors": [
+    "Orry Verducci"
+  ],
+  "license": "Apache",
+  "homepage": "https://github.com/orryverducci/ApolloClock",
+  "private": true
+}
