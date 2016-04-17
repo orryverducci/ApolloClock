@@ -2,8 +2,8 @@
     "compilerOptions": { 
         "noImplicitAny": false,
         "noEmitOnError": true,
-        "removeComments": false,
-        "sourceMap": true,
+        "removeComments": true,
+        "sourceMap": false,
         "inlineSources": true,
         "out": "www/scripts/appBundle.js",
         "target": "es5"
