@@ -1,5 +1,5 @@
 {
-  "name": "ApolloClock",
+  "name": "apolloclock.electron",
   "version": "3.0.0",
   "private": true,
   "description": "Digital clock and information display for broadcast studios",
