@@ -6,6 +6,7 @@
     "name": "Orry Verducci"
   },
   "devDependencies": {
-    "bower": "^1.7.9"
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1"
   }
 }
