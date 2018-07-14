@@ -16,6 +16,10 @@
     "esm": "^3.0.70"
   },
   "devDependencies": {
-    "electron": "^2.0.5"
+    "del": "^3.0.0",
+    "electron": "^2.0.5",
+    "gulp": "^4.0.0",
+    "gulp-sass": "^4.0.1",
+    "vinyl-paths": "^2.1.0"
   }
 }
