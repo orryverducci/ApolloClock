@@ -1,0 +1,15 @@
+{
+  "name": "apolloclock",
+  "version": "3.0.0",
+  "description": "Digital clock and information display for broadcast studios",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orryverducci/ApolloClock.git"
+  },
+  "author": "Orry Verducci",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/orryverducci/ApolloClock/issues"
+  },
+  "homepage": "https://github.com/orryverducci/ApolloClock#readme"
+}
