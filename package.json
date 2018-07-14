@@ -11,5 +11,8 @@
   "bugs": {
     "url": "https://github.com/orryverducci/ApolloClock/issues"
   },
-  "homepage": "https://github.com/orryverducci/ApolloClock#readme"
+  "homepage": "https://github.com/orryverducci/ApolloClock#readme",
+  "devDependencies": {
+    "electron": "^2.0.5"
+  }
 }
