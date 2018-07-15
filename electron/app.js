@@ -1,4 +1,5 @@
 ﻿import {app, BrowserWindow, protocol} from "electron";
+import installExtension, {VUEJS_DEVTOOLS} from "electron-devtools-installer";
 import {readFileSync as read} from "fs";
 import jsonfile from "jsonfile";
 import path from "path";
@@ -46,6 +47,16 @@ function createAppProtocol() {
 }
 
 /**
+ * Setup Chrome developer tools
+ */
+function setupDevTools() {
+    // Add Vue Devtools
+    installExtension(VUEJS_DEVTOOLS).catch((error) => {
+        console.log(`Unable to add Vue Devtools: ${error}`);
+    });
+}
+
+/**
  * Creates the main application window
  */
 function createMainWindow() {
@@ -65,6 +76,7 @@ function createMainWindow() {
 // Create the main window when Electron has finished initialization
 app.on("ready", () => {
     createAppProtocol();
+    setupDevTools();
     createMainWindow();
 });
 

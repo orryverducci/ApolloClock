@@ -49,8 +49,14 @@ gulp.task("build:sass", () => {
         }));
 });
 
+gulp.task("build:vue", () => {
+    return gulp.src(path.join(__dirname, "node_modules", "vue", "dist", "vue.esm.js"))
+        .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
+});
+
 gulp.task("build:all", gulp.series(
     "build:copy",
+    "build:vue",
     "build:sass"
 ));
 
