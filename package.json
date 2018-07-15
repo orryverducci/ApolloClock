@@ -13,7 +13,8 @@
   },
   "homepage": "https://github.com/orryverducci/ApolloClock#readme",
   "dependencies": {
-    "esm": "^3.0.70"
+    "esm": "^3.0.70",
+    "jsonfile": "^4.0.0"
   },
   "devDependencies": {
     "del": "^3.0.0",
