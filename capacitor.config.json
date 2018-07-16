@@ -1,0 +1,6 @@
+{
+    "appId": "uk.co.orryverducci.apolloclock",
+    "appName": "ApolloClock",
+    "bundledWebRuntime": false,
+    "webDir": "app"
+}
