@@ -50,7 +50,7 @@ gulp.task("build:sass", () => {
 });
 
 gulp.task("build:vue", () => {
-    return gulp.src(path.join(__dirname, "node_modules", "vue", "dist", "vue.esm.js"))
+    return gulp.src(path.join(__dirname, "node_modules", "vue", "dist", "vue.esm.browser.js"))
         .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
 });
 
