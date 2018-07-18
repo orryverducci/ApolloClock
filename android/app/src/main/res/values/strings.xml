@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ApolloClock</string>
+    <string name="title_activity_main">ApolloClock</string>
+    <string name="package_name">uk.co.orryverducci.apolloclock</string>
+    <string name="fileprovider_authority">uk.co.orryverducci.apolloclock.fileprovider</string>
+    <string name="custom_url_scheme">uk.co.orryverducci.apolloclock</string>
+</resources>

@@ -69,6 +69,17 @@ gulp.task("prepare:electron", () => {
         .pipe(gulp.dest(path.join(__dirname, "electron", "app")));
 });
 
+gulp.task("prepare:android", (done) => {
+    let extension = "";
+    if (os.platform == "win32") {
+        extension = ".bat";
+    }
+    this.process = spawn(path.join(__dirname, "node_modules", ".bin", "cap" + extension), ["copy", "android"], {
+        windowsHide: true
+    });
+    done();
+});
+
 gulp.task("prepare:ios", (done) => {
     let extension = "";
     if (os.platform == "win32") {
@@ -90,6 +101,17 @@ gulp.task("run:electron", (done) => {
         extension = ".bat";
     }
     this.process = spawn(path.join(__dirname, "node_modules", ".bin", "electron" + extension), [path.join(__dirname, "electron", "main.js")], {
+        windowsHide: true
+    });
+    done();
+});
+
+gulp.task("run:android", (done) => {
+    let extension = "";
+    if (os.platform == "win32") {
+        extension = ".bat";
+    }
+    this.process = spawn(path.join(__dirname, "node_modules", ".bin", "cap" + extension), ["open", "android"], {
         windowsHide: true
     });
     done();
