@@ -12,14 +12,12 @@ const gulp = require("gulp"),
 *** CLEAN TASKS
 ****************/
 
-gulp.task("clean:build", (done) => {
-    del.sync(path.join(__dirname, "build"));
-    done();
+gulp.task("clean:build", () => {
+    return del(path.join(__dirname, "build"));
 });
 
-gulp.task("clean:electron", (done) => {
-    del.sync(path.join(__dirname, "electron", "app"));
-    done();
+gulp.task("clean:electron", () => {
+    return del(path.join(__dirname, "electron", "app"));
 });
 
 gulp.task("clean:all", gulp.parallel(
