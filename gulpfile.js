@@ -104,6 +104,13 @@ gulp.task("run:electron", (done) => {
     done();
 });
 
+gulp.task("run:electron:with-build", gulp.series(
+    "clean:electron",
+    "build:all",
+    "prepare:electron",
+    "run:electron"
+));
+
 gulp.task("run:android", (done) => {
     let extension = "";
     if (os.platform == "win32") {
@@ -115,6 +122,13 @@ gulp.task("run:android", (done) => {
     done();
 });
 
+gulp.task("run:android:with-build", gulp.series(
+    "clean:build",
+    "build:all",
+    "prepare:android",
+    "run:android"
+));
+
 gulp.task("run:ios", (done) => {
     let extension = "";
     if (os.platform == "win32") {
@@ -125,3 +139,10 @@ gulp.task("run:ios", (done) => {
     });
     done();
 });
+
+gulp.task("run:ios:with-build", gulp.series(
+    "clean:build",
+    "build:all",
+    "prepare:ios",
+    "run:ios"
+));
