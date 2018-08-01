@@ -20,9 +20,19 @@ gulp.task("clean:electron", () => {
     return del(path.join(__dirname, "electron", "app"));
 });
 
+gulp.task("clean:android", () => {
+    return del(path.join(__dirname, "android", "app", "src", "main", "assets", "public", "**", "*"));
+});
+
+gulp.task("clean:ios", () => {
+    return del(path.join(__dirname, "ios", "App", "public", "**", "*"));
+});
+
 gulp.task("clean:all", gulp.parallel(
     "clean:build",
-    "clean:electron"
+    "clean:electron",
+    "clean:android",
+    "clean:ios"
 ));
 
 /***************
@@ -67,26 +77,14 @@ gulp.task("prepare:electron", () => {
         .pipe(gulp.dest(path.join(__dirname, "electron", "app")));
 });
 
-gulp.task("prepare:android", (done) => {
-    let extension = "";
-    if (os.platform == "win32") {
-        extension = ".bat";
-    }
-    this.process = spawn(path.join(__dirname, "node_modules", ".bin", "cap" + extension), ["copy", "android"], {
-        windowsHide: true
-    });
-    done();
+gulp.task("prepare:android", () => {
+    return gulp.src(path.join(__dirname, "build", "**", "*"))
+        .pipe(gulp.dest(path.join(__dirname, "android", "app", "src", "main", "assets")));
 });
 
-gulp.task("prepare:ios", (done) => {
-    let extension = "";
-    if (os.platform == "win32") {
-        extension = ".bat";
-    }
-    this.process = spawn(path.join(__dirname, "node_modules", ".bin", "cap" + extension), ["copy", "ios"], {
-        windowsHide: true
-    });
-    done();
+gulp.task("prepare:ios", () => {
+    return gulp.src(path.join(__dirname, "build", "**", "*"))
+        .pipe(gulp.dest(path.join(__dirname, "ios", "App", "public")));
 });
 
 /*************
