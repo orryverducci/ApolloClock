@@ -1,4 +1,4 @@
-﻿import {app, BrowserWindow, protocol} from "electron";
+﻿import {app, BrowserWindow, protocol, ipcMain} from "electron";
 import installExtension, {VUEJS_DEVTOOLS} from "electron-devtools-installer";
 import {readFileSync as read} from "fs";
 import jsonfile from "jsonfile";
@@ -63,7 +63,8 @@ function createMainWindow() {
     // Create the main window
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 600
+        height: 600,
+        show: false
     });
     // Load the main window
     mainWindow.loadURL("app://apolloclock/index.html");
@@ -78,6 +79,11 @@ app.on("ready", () => {
     createAppProtocol();
     setupDevTools();
     createMainWindow();
+});
+
+// Show the main window when the ready event has been received from the renderer process
+ipcMain.on("ready", (event, arg) => {  
+    mainWindow.show();
 });
 
 // Quit the application when all windows are closed
