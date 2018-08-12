@@ -73,7 +73,7 @@ gulp.task("build:capacitor-platform", () => {
             format: "es",
             plugins: [
                 resolve({
-                  main: true,
+                    main: true,
                 })
             ]
         })
