@@ -67,6 +67,20 @@ gulp.task("build:vue", () => {
         .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
 });
 
+gulp.task("build:moment", () => {
+    return rollup({
+            input: path.join(__dirname, "node_modules", "moment", "src", "moment.js"),
+            format: "es",
+            plugins: [
+                resolve({
+                    main: true,
+                })
+            ]
+        })
+        .pipe(source("moment.js"))
+        .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
+});
+
 gulp.task("build:capacitor-platform", () => {
     return rollup({
             input: path.join(__dirname, "build", "scripts", "capacitor.platform.js"),
@@ -84,6 +98,7 @@ gulp.task("build:capacitor-platform", () => {
 gulp.task("build:all", gulp.series(
     "build:copy",
     "build:vue",
+    "build:moment",
     "build:sass",
     "build:capacitor-platform"
 ));
