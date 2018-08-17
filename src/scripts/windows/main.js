@@ -1,7 +1,11 @@
 import moment from "../moment.js";
+import BroadcastClock from "../panels/broadcastclock.js";
 
 export default {
-    template: '<main id="main-window"></main>',
+    template: '<main id="main-window"><broadcast-clock v-bind:time="time"></broadcast-clock></main>',
+    components: {
+        BroadcastClock
+    },
     data: function() {
         return {
             time: moment()
