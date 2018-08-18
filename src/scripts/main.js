@@ -7,6 +7,9 @@ new Vue({
     components: {
         MainWindow
     },
+    data: {
+        currentWindow: "MainWindow"
+    },
     mounted: () => {
         platform.AppReady();
     }
