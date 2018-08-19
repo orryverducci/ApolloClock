@@ -8,10 +8,16 @@ export default {
     },
     data: function() {
         return {
+            /**
+             * The current time as a moment.js object.
+             */
             time: moment()
         }
     },
     methods: {
+        /**
+         * Updates the clock if the time has changed.
+         */
         UpdateClock: function() {
             // Get current time
             let time = moment();
@@ -24,6 +30,7 @@ export default {
         }
     },
     mounted: function() {
+        // Update the clock
         this.UpdateClock();
     }
 }
