@@ -3,5 +3,5 @@
     "js": "text/javascript",
     "json": "application/json",
     "css": "text/css",
-    "svg": "application/svg+xml"
+    "svg": "image/svg+xml"
 }
