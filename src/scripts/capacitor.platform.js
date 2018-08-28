@@ -1,5 +1,5 @@
 import { Plugins } from "@capacitor/core";
-const { SplashScreen } = Plugins;
+const { App, SplashScreen } = Plugins;
 
 /**
  * Provides platform specific functionality.
@@ -11,6 +11,10 @@ class Platform {
     AppReady() {
         // Hide the splash screen
         SplashScreen.hide();
+        // Enable platform back button, exiting the app when pressed
+        App.addListener("backButton", () => {
+            App.exitApp();
+        });
     }
 }
 
