@@ -54,7 +54,8 @@ gulp.task("build:sass", () => {
         .pipe(vinylPaths(del))
         .pipe(sass({
             includePaths: [
-                path.join(__dirname, "src", "styles")
+                path.join(__dirname, "src", "styles"),
+                path.join(__dirname, "node_modules")
             ]
         }).on("error", sass.logError))
         .pipe(gulp.dest((file) => {

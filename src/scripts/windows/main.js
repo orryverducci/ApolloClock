@@ -2,7 +2,7 @@ import moment from "../moment.js";
 import BroadcastClock from "../panels/broadcastclock.js";
 
 export default {
-    template: '<main id="main-window"><broadcast-clock v-bind:time="time"></broadcast-clock></main>',
+    template: '<main id="main-window" v-on:contextmenu="OpenMenu" v-on:click="CloseMenu" v-on:touchstart="TouchStart" v-on:touchend="TouchEnd"><broadcast-clock v-bind:time="time"></broadcast-clock></main>',
     components: {
         BroadcastClock
     },
@@ -27,10 +27,32 @@ export default {
             }
             // Run this function again on the next frame
             window.requestAnimationFrame(this.UpdateClock);
+        },
+        /**
+         * Emits an event signalling the options menu should be opened.
+         */
+        OpenMenu: function() {
+            this.$emit("open-menu");
+        },
+        /**
+         * Emits an event signalling the options menu should be closed.
+         */
+        CloseMenu: function() {
+            this.$emit("close-menu");
+        },
+        TouchStart: function(event) {
+            this.$options.swipeStartX = event.changedTouches[0].clientX;
+        },
+        TouchEnd: function(event) {
+            let swipeDistance = this.$options.swipeStartX - event.changedTouches[0].clientX;
+            if (swipeDistance > 100) {
+                this.OpenMenu();
+            }
         }
     },
     mounted: function() {
         // Update the clock
         this.UpdateClock();
-    }
+    },
+    swipeStartX: 0
 }
