@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@capacitor/android": "^1.0.0-beta.1",
-    "@capacitor/cli": "^1.0.0-beta.1",
-    "@capacitor/core": "^1.0.0-beta.1",
+    "@capacitor/cli": "^1.0.0-beta.8",
+    "@capacitor/core": "^1.0.0-beta.8",
     "@capacitor/ios": "^1.0.0-beta.1",
     "@material/animation": "^0.34.0",
     "del": "^3.0.0",
