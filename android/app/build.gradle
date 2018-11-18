@@ -20,7 +20,12 @@ android {
 }
 
 repositories {
-maven { url 'https://dl.bintray.com/ionic-team/capacitor' }
+    maven {
+        url 'https://dl.bintray.com/ionic-team/capacitor'
+    }
+    flatDir{
+        dirs '../../node_modules/@capacitor/cli/assets/capacitor-android-plugins/src/main/libs', 'libs'
+    }
 }
 
 dependencies {
@@ -32,6 +37,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':capacitor-android-plugins')
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    implementation 'com.android.support:support-v4:27.1.1'
 }
 
 apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.warn("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
