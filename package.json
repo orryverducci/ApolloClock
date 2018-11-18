@@ -23,7 +23,7 @@
     "@capacitor/ios": "^1.0.0-beta.1",
     "@material/animation": "^0.34.0",
     "del": "^3.0.0",
-    "electron": "^2.0.5",
+    "electron": "^3.0.9",
     "electron-devtools-installer": "^2.2.4",
     "gulp": "^4.0.0",
     "gulp-rename": "^1.4.0",
