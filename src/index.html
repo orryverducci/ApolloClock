@@ -8,10 +8,7 @@
     </head>
     <body>
         <div id="container">
-            <component v-bind:is="currentWindow" v-on:open-menu="OpenMenu" v-on:close-menu="CloseMenu"></component>
-            <transition>
-                <options-menu v-if="menuOpen"></options-menu>
-            </transition>
+            <component v-bind:is="currentWindow"></component>
         </div>
     </body>
 </html>

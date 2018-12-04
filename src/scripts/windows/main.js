@@ -2,16 +2,18 @@ import moment from "../moment.js";
 import BroadcastClock from "../panels/broadcastclock.js";
 
 export default {
-    template: '<main id="main-window" v-on:contextmenu="OpenMenu" v-on:click="CloseMenu" v-on:touchstart="TouchStart" v-on:touchend="TouchEnd"><broadcast-clock v-bind:time="time"></broadcast-clock></main>',
+    template: '<main id="main-window"><div id="panels" v-on:contextmenu="OpenMenu" v-on:click="CloseMenu" v-on:touchstart="TouchStart" v-on:touchend="TouchEnd"><broadcast-clock v-bind:time="time"></broadcast-clock></div><transition><options-menu v-if="menuOpen"></options-menu></transition></main>',
     components: {
-        BroadcastClock
+        BroadcastClock,
+        OptionsMenu
     },
     data: function() {
         return {
             /**
              * The current time as a moment.js object.
              */
-            time: moment()
+            time: moment(),
+            menuOpen: false
         }
     },
     methods: {
@@ -32,13 +34,13 @@ export default {
          * Emits an event signalling the options menu should be opened.
          */
         OpenMenu: function() {
-            this.$emit("open-menu");
+            this.menuOpen = true;
         },
         /**
          * Emits an event signalling the options menu should be closed.
          */
         CloseMenu: function() {
-            this.$emit("close-menu");
+            this.menuOpen = false;
         },
         TouchStart: function(event) {
             this.$options.swipeStartX = event.changedTouches[0].clientX;

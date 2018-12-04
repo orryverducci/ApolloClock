@@ -1,24 +1,16 @@
 import Vue from "./vue.esm.browser.js";
 import {platform} from "./platform.js";
 import MainWindow from "./windows/main.js";
-import OptionsMenu from "./windows/options.js";
 
 new Vue({ 
     el: "#container",
     components: {
-        MainWindow,
-        OptionsMenu
+        MainWindow
     },
     data: {
-        currentWindow: "MainWindow",
-        menuOpen: false
+        currentWindow: "MainWindow"
     },
     methods: {
-        OpenMenu: function() {
-            this.menuOpen = true;
-        },
-        CloseMenu: function() {
-            this.menuOpen = false;
         }
     },
     mounted: () => {
