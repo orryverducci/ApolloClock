@@ -13,4 +13,30 @@ a {
 
 #container {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+        flex: 1 0 auto;
+    }
+
+    nav {
+        flex: 0 0 auto;
+        background: #37474f;
+        
+        a {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+
+            &:hover, &:active {
+                background: #62727b;
+            }
+
+            img {
+                height: 1rem;
+                vertical-align: middle;
+                margin-right: 0.5rem;
+            }
+        }
+    }
 }

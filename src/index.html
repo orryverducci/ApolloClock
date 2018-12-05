@@ -8,6 +8,7 @@
     </head>
     <body>
         <div id="container">
+            <nav v-if="showBack"><a href="#" v-on:click="GoBack($event)"><img src="images/caret-square-left.svg">Back</a></nav>
             <component v-bind:is="currentWindow"></component>
         </div>
     </body>
