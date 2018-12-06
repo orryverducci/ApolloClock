@@ -1,5 +1,6 @@
 import moment from "../moment.js";
 import BroadcastClock from "../panels/broadcastclock.js";
+import OptionsMenu from "./options.js";
 
 export default {
     template: '<main id="main-window"><div id="panels" v-on:contextmenu="OpenMenu" v-on:click="CloseMenu" v-on:touchstart="TouchStart" v-on:touchend="TouchEnd"><broadcast-clock v-bind:time="time"></broadcast-clock></div><transition><options-menu v-if="menuOpen"></options-menu></transition></main>',

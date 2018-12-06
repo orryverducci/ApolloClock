@@ -1,12 +1,15 @@
 import Vue from "./vue.esm.browser.js";
 import {platform} from "./platform.js";
 import MainWindow from "./windows/main.js";
+import AboutWindow from "./windows/about.js";
 import EventHub from "./eventhub.js";
 
 new Vue({ 
     el: "#container",
     components: {
-        MainWindow
+        MainWindow,
+        AboutWindow
+    },
     computed: {
         showBack: function () {
           return this.currentWindow !== "MainWindow";

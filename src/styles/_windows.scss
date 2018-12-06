@@ -71,3 +71,13 @@
         }
     }
 }
+
+#about-window {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    h1, h2 {
+        text-align: center;
+    }
+}

@@ -1,3 +1,5 @@
+import EventHub from "../eventhub.js";
+
 export default {
     template:
         `<aside id="options-menu">
@@ -17,7 +19,7 @@ export default {
             },
             OpenAbout: function(event) {
                 event.preventDefault();
-                alert("Not Yet Implemented");
+                EventHub.$emit("open-page", "about");
             }
         }
 }
