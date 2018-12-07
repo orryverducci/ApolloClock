@@ -1,30 +1,30 @@
 import Vue from "./vue.esm.browser.js";
 import {platform} from "./platform.js";
-import MainWindow from "./windows/main.js";
-import AboutWindow from "./windows/about.js";
+import MainPage from "./pages/main.js";
+import AboutPage from "./pages/about.js";
 import EventHub from "./eventhub.js";
 
 new Vue({ 
     el: "#container",
     components: {
-        MainWindow,
-        AboutWindow
+        MainPage,
+        AboutPage
     },
     computed: {
         showBack: function () {
-          return this.currentWindow !== "MainWindow";
+          return this.currentPage !== "MainPage";
         }
     },
     data: {
-        currentWindow: "MainWindow"
+        currentPage: "MainPage"
     },
     methods: {
         OpenPage: function(page) {
-            this.currentWindow = `${page.charAt(0).toUpperCase()}${page.slice(1)}Window`;
+            this.currentPage = `${page.charAt(0).toUpperCase()}${page.slice(1)}Page`;
         },
         GoBack: function(event) {
             event.preventDefault();
-            this.currentWindow = "MainWindow";
+            this.currentPage = "MainPage";
         }
     },
     mounted: function() {
