@@ -45,7 +45,7 @@ gulp.task("clean:all", gulp.parallel(
 ****************/
 
 gulp.task("build:copy", () => {
-    return gulp.src(path.join(__dirname, "src", "**", "*"))
+    return gulp.src(path.join(__dirname, "frontend", "**", "*"))
         .pipe(gulp.dest(path.join(__dirname, "build")));
 });
 
@@ -54,7 +54,7 @@ gulp.task("build:sass", () => {
         .pipe(vinylPaths(del))
         .pipe(sass({
             includePaths: [
-                path.join(__dirname, "src", "styles"),
+                path.join(__dirname, "frontend", "styles"),
                 path.join(__dirname, "node_modules")
             ]
         }).on("error", sass.logError))
