@@ -1,4 +1,4 @@
-import EventHub from "../eventhub.js";
+import EventHub from "../../eventhub.js";
 
 export default {
     template:

@@ -1,5 +1,5 @@
-import moment from "../moment.js";
-import BroadcastClock from "../panels/broadcastclock.js";
+import moment from "../../moment.js";
+import BroadcastClock from "../../panels/broadcastclock.js";
 import OptionsMenu from "./options.js";
 
 export default {
