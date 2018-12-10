@@ -168,6 +168,7 @@ gulp.task("run:electron", (done) => {
 });
 
 gulp.task("run:electron:with-build", gulp.series(
+    "clean:build",
     "clean:electron",
     "build:all",
     "prepare:electron",
@@ -187,6 +188,7 @@ gulp.task("run:android", (done) => {
 
 gulp.task("run:android:with-build", gulp.series(
     "clean:build",
+    "clean:android",
     "build:all",
     "prepare:android",
     "run:android"
@@ -205,6 +207,7 @@ gulp.task("run:ios", (done) => {
 
 gulp.task("run:ios:with-build", gulp.series(
     "clean:build",
+    "clean:ios",
     "build:all",
     "prepare:ios",
     "run:ios"
