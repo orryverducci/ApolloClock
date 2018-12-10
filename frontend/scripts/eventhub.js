@@ -1,3 +1,3 @@
-import Vue from "./vue.esm.browser.js";
+import Vue from "Vue";
 
 export default new Vue();

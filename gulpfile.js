@@ -11,7 +11,8 @@ const gulp = require("gulp"),
     source = require("vinyl-source-stream"),
     {spawn} = require("child_process"),
     os = require("os"),
-    vinylPaths = require("vinyl-paths");
+    alias = require("rollup-plugin-alias"),
+    replace = require("rollup-plugin-replace");
 
 /***************
 *** CLEAN TASKS
@@ -45,63 +46,67 @@ gulp.task("clean:all", gulp.parallel(
 ****************/
 
 gulp.task("build:copy", () => {
-    return gulp.src(path.join(__dirname, "frontend", "**", "*"))
+    return gulp.src([path.join(__dirname, "frontend", "**", "*"), `!${path.join(__dirname, "frontend", "scripts", "**")}`, `!${path.join(__dirname, "frontend", "styles", "**")}`])
         .pipe(gulp.dest(path.join(__dirname, "build")));
 });
 
 gulp.task("build:sass", () => {
-    return gulp.src(path.join(__dirname, "build", "**", "*.scss"))
-        .pipe(vinylPaths(del))
+    return gulp.src(path.join(__dirname, "frontend", "styles", "*.scss"))
         .pipe(sass({
             includePaths: [
                 path.join(__dirname, "frontend", "styles"),
                 path.join(__dirname, "node_modules")
             ]
         }).on("error", sass.logError))
-        .pipe(gulp.dest((file) => {
-            return file.base;
-        }));
+        .pipe(gulp.dest(path.join(__dirname, "build", "styles")));
 });
 
-gulp.task("build:vue", () => {
-    return gulp.src(path.join(__dirname, "node_modules", "vue", "dist", "vue.esm.browser.js"))
-        .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
-});
-
-gulp.task("build:moment", () => {
+gulp.task("build:js-capacitor", () => {
     return rollup({
-            input: path.join(__dirname, "node_modules", "moment", "src", "moment.js"),
+            input: path.join(__dirname, "frontend", "scripts", "main.js"),
             format: "es",
             plugins: [
+                alias({
+                    platform: path.join(__dirname, "frontend", "scripts", "capacitor.platform.js"),
+                    Vue: path.join(__dirname, "node_modules", "vue", "dist", "vue.esm.js")
+                }),
+                replace({
+                    "process.env.NODE_ENV": JSON.stringify("development")
+                }),
                 resolve({
-                    main: true,
+                    main: false,
+                    jsnext: true
                 })
             ]
         })
-        .pipe(source("moment.js"))
+        .pipe(source("capacitor.main.js"))
         .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
 });
 
-gulp.task("build:capacitor-platform", () => {
+gulp.task("build:js-electron", () => {
     return rollup({
-            input: path.join(__dirname, "build", "scripts", "capacitor.platform.js"),
+            input: path.join(__dirname, "frontend", "scripts", "main.js"),
             format: "es",
             plugins: [
+                alias({
+                    platform: path.join(__dirname, "frontend", "scripts", "electron.platform.js"),
+                    Vue: path.join(__dirname, "node_modules", "vue", "dist", "vue.esm.js")
+                }),
                 resolve({
-                    main: true,
+                    main: false,
+                    jsnext: true
                 })
             ]
         })
-        .pipe(source("capacitor.platform.js"))
+        .pipe(source("electron.main.js"))
         .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
 });
 
-gulp.task("build:all", gulp.series(
+gulp.task("build:all", gulp.parallel(
     "build:copy",
-    "build:vue",
-    "build:moment",
     "build:sass",
-    "build:capacitor-platform"
+    "build:js-capacitor",
+    "build:js-electron"
 ));
 
 /*****************
@@ -109,22 +114,22 @@ gulp.task("build:all", gulp.series(
 ******************/
 
 gulp.task("prepare:electron", () => {
-    let appFiles = gulp.src([path.join(__dirname, "build", "**", "*"), `!${path.join(__dirname, "build", "scripts", "*.platform.js")}`])
+    let appFiles = gulp.src([path.join(__dirname, "build", "**", "*"), `!${path.join(__dirname, "build", "scripts", "*.main.js")}`])
         .pipe(gulp.dest(path.join(__dirname, "electron", "app")));
 
-    let platformFile = gulp.src(path.join(__dirname, "build", "scripts", "electron.platform.js"))
-        .pipe(rename("platform.js"))
+    let platformFile = gulp.src(path.join(__dirname, "build", "scripts", "electron.main.js"))
+        .pipe(rename("main.js"))
         .pipe(gulp.dest(path.join(__dirname, "electron", "app", "scripts")));
 
     return merge(appFiles, platformFile);
 });
 
 gulp.task("prepare:android", () => {
-    let appFiles = gulp.src([path.join(__dirname, "build", "**", "*"), `!${path.join(__dirname, "build", "scripts", "*.platform.js")}`])
+    let appFiles = gulp.src([path.join(__dirname, "build", "**", "*"), `!${path.join(__dirname, "build", "scripts", "*.main.js")}`])
         .pipe(gulp.dest(path.join(__dirname, "android", "app", "src", "main", "assets", "public")));
     
-    let platformFile = gulp.src(path.join(__dirname, "build", "scripts", "capacitor.platform.js"))
-        .pipe(rename("platform.js"))
+    let platformFile = gulp.src(path.join(__dirname, "build", "scripts", "capacitor.main.js"))
+        .pipe(rename("main.js"))
         .pipe(gulp.dest(path.join(__dirname, "android", "app", "src", "main", "assets", "public", "scripts")));
 
     let nativeBridge = gulp.src(path.join(__dirname, "node_modules", "@capacitor", "core", "native-bridge.js"))
@@ -134,11 +139,11 @@ gulp.task("prepare:android", () => {
 });
 
 gulp.task("prepare:ios", () => {
-    let appFiles = gulp.src([path.join(__dirname, "build", "**", "*"), `!${path.join(__dirname, "build", "scripts", "*.platform.js")}`])
+    let appFiles = gulp.src([path.join(__dirname, "build", "**", "*"), `!${path.join(__dirname, "build", "scripts", "*.main.js")}`])
         .pipe(gulp.dest(path.join(__dirname, "ios", "App", "public")));
 
-    let platformFile = gulp.src(path.join(__dirname, "build", "scripts", "capacitor.platform.js"))
-        .pipe(rename("platform.js"))
+    let platformFile = gulp.src(path.join(__dirname, "build", "scripts", "capacitor.main.js"))
+        .pipe(rename("main.js"))
         .pipe(gulp.dest(path.join(__dirname, "ios", "App", "public", "scripts")));
 
     let nativeBridge = gulp.src(path.join(__dirname, "node_modules", "@capacitor", "core", "native-bridge.js"))

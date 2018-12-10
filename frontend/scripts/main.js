@@ -1,5 +1,5 @@
-import Vue from "./vue.esm.browser.js";
-import {platform} from "./platform.js";
+import Vue from "Vue";
+import {platform} from "platform";
 import MainPage from "./pages/main/page.js";
 import AboutPage from "./pages/about/page.js";
 import EventHub from "./eventhub.js";

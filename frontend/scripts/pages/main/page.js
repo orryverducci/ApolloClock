@@ -1,4 +1,4 @@
-import moment from "../../moment.js";
+import moment from "moment";
 import BroadcastClock from "../../panels/broadcastclock.js";
 import OptionsMenu from "./options.js";
 
