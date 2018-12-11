@@ -6,13 +6,14 @@ const gulp = require("gulp"),
     path = require("path"),
     rename = require("gulp-rename"),
     resolve = require("rollup-plugin-node-resolve"),
-    rollup = require("rollup-stream"),
+    rollup = require("gulp-better-rollup"),
     sass = require("gulp-sass"),
     source = require("vinyl-source-stream"),
     {spawn} = require("child_process"),
     os = require("os"),
     alias = require("rollup-plugin-alias"),
-    replace = require("rollup-plugin-replace");
+    replace = require("rollup-plugin-replace"),
+    { terser } = require("rollup-plugin-terser");
 
 /***************
 *** CLEAN TASKS
@@ -56,15 +57,16 @@ gulp.task("build:sass", () => {
             includePaths: [
                 path.join(__dirname, "frontend", "styles"),
                 path.join(__dirname, "node_modules")
-            ]
+            ],
+            outputStyle: "compressed"
         }).on("error", sass.logError))
         .pipe(gulp.dest(path.join(__dirname, "build", "styles")));
 });
 
 gulp.task("build:js-capacitor", () => {
-    return rollup({
-            input: path.join(__dirname, "frontend", "scripts", "main.js"),
-            format: "es",
+    return gulp.src(path.join(__dirname, "frontend", "scripts", "main.js"))
+        .pipe(rollup({
+            cache: false,
             plugins: [
                 alias({
                     platform: path.join(__dirname, "frontend", "scripts", "capacitor.platform.js"),
@@ -76,17 +78,20 @@ gulp.task("build:js-capacitor", () => {
                 resolve({
                     main: false,
                     jsnext: true
-                })
+                }),
+                terser()
             ]
-        })
-        .pipe(source("capacitor.main.js"))
+        }, {
+            file: "capacitor.main.js",
+            format: "es"
+        }))
         .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
 });
 
 gulp.task("build:js-electron", () => {
-    return rollup({
-            input: path.join(__dirname, "frontend", "scripts", "main.js"),
-            format: "es",
+    return gulp.src(path.join(__dirname, "frontend", "scripts", "main.js"))
+    .pipe(rollup({
+            cache: false,
             plugins: [
                 alias({
                     platform: path.join(__dirname, "frontend", "scripts", "electron.platform.js"),
@@ -95,10 +100,13 @@ gulp.task("build:js-electron", () => {
                 resolve({
                     main: false,
                     jsnext: true
-                })
+                }),
+                terser()
             ]
-        })
-        .pipe(source("electron.main.js"))
+        }, {
+            file: "electron.main.js",
+            format: "es"
+        }))
         .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
 });
 
