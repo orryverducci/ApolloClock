@@ -16,6 +16,27 @@ class Platform {
             App.exitApp();
         });
     }
+
+    /**
+     * Sets a configuration setting.
+     * @param {string} key The key the data should be stored as.
+     * @param {string} data The data to be stored.
+     */
+    async SetConfig(key, data) {
+        await Storage.set({
+            key: key,
+            value: data
+        });
+    }
+
+    /**
+     * Gets a configuration setting.
+     * @param {string} key The key for the data to be retrieved.
+     * @returns {string} The configuration data.
+     */
+    GetConfig(key) {
+        return await Storage.get({ key: key });
+    }
 }
 
 // Export class as a singleton
