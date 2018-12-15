@@ -34,7 +34,7 @@ class Platform {
      * @param {string} key The key for the data to be retrieved.
      * @returns {string} The configuration data.
      */
-    GetConfig(key) {
+    async GetConfig(key) {
         return await Storage.get({ key: key });
     }
 }
