@@ -61,12 +61,10 @@
                 }
             }
 
-            img {
-                max-width: 1.7rem;
-                max-height: 1.7rem;
-                vertical-align: middle;
+            .icon {
+                font-size: 1.7rem;
                 margin-right: 0.8rem;
-                fill: currentColor;
+                vertical-align: middle;
             }
         }
     }

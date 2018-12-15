@@ -1,14 +1,20 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faInfoCircle, faObjectGroup } from "@fortawesome/free-solid-svg-icons";
 import EventHub from "../../eventhub.js";
 
 export default {
+    created: function() {
+        library.add(faInfoCircle);
+        library.add(faObjectGroup);
+    },
     template:
         `<aside id="options-menu">
             <ul>
                 <li><a href="#" v-on:click="OpenPanels($event)">
-                    <img src="images/object-group.svg">Change Panels
+                    <span class="icon"><font-awesome-icon icon="object-group" /></span>Change Panels
                 </a></li>
                 <li><a href="#" v-on:click="OpenAbout($event)">
-                    <img src="images/info-circle.svg">About
+                    <span class="icon"><font-awesome-icon icon="info-circle" /></span>About
                 </a></li>
             </ul>
         </aside>`,

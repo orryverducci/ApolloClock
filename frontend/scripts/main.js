@@ -1,4 +1,7 @@
 import Vue from "Vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCaretSquareLeft } from "@fortawesome/free-solid-svg-icons";
 import {platform} from "platform";
 import MainPage from "./pages/main/page.js";
 import AboutPage from "./pages/about/page.js";
@@ -14,6 +17,11 @@ new Vue({
         showBack: function () {
           return this.currentPage !== "MainPage";
         }
+    },
+    created: function() {
+        // Setup global component for Font Awesome
+        Vue.component("font-awesome-icon", FontAwesomeIcon);
+        library.add(faCaretSquareLeft);
     },
     data: {
         currentPage: "MainPage"
