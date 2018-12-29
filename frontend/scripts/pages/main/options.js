@@ -18,14 +18,14 @@ export default {
                 </a></li>
             </ul>
         </aside>`,
-        methods: {
-            OpenPanels: function(event) {
-                event.preventDefault();
-                alert("Not Yet Implemented");
-            },
-            OpenAbout: function(event) {
-                event.preventDefault();
-                EventHub.$emit("open-page", "about");
-            }
+    methods: {
+        OpenPanels: function(event) {
+            event.preventDefault();
+            alert("Not Yet Implemented");
+        },
+        OpenAbout: function(event) {
+            event.preventDefault();
+            EventHub.$emit("open-page", "about");
         }
+    }
 }
