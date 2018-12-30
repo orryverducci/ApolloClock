@@ -2,7 +2,11 @@
  * A panel showing a broadcast style clock.
  */
 export default {
-    template: '<div class="broadcast-clock"><canvas ref="canvas"></canvas></div>',
+    template: `
+        <div class="broadcast-clock">
+            <canvas ref="canvas"></canvas>
+        </div>
+    `,
     props: {
         /**
          * The current time as a moment.js object.

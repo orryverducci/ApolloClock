@@ -6,7 +6,16 @@ import OptionsMenu from "./options.js";
  * The main page.
  */
 export default {
-    template: '<main id="main-page"><div id="panels" v-on:contextmenu="OpenMenu" v-on:click="CloseMenu" v-on:touchstart="TouchStart" v-on:touchend="TouchEnd"><broadcast-clock v-bind:time="time"></broadcast-clock></div><transition><options-menu v-if="menuOpen"></options-menu></transition></main>',
+    template: `
+        <main id="main-page">
+            <div id="panels" v-on:contextmenu="OpenMenu" v-on:click="CloseMenu" v-on:touchstart="TouchStart" v-on:touchend="TouchEnd">
+                <broadcast-clock v-bind:time="time"></broadcast-clock>
+            </div>
+            <transition>
+                <options-menu v-if="menuOpen"></options-menu>
+            </transition>
+        </main>
+    `,
     components: {
         BroadcastClock,
         OptionsMenu
