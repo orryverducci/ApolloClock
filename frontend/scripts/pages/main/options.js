@@ -13,8 +13,8 @@ export default {
         library.add(faInfoCircle);
         library.add(faObjectGroup);
     },
-    template:
-        `<aside id="options-menu">
+    template: `
+        <aside id="options-menu">
             <ul>
                 <li><a href="#" v-on:click="OpenPanels($event)">
                     <span class="icon"><font-awesome-icon icon="object-group" /></span>Change Panels
@@ -23,7 +23,8 @@ export default {
                     <span class="icon"><font-awesome-icon icon="info-circle" /></span>About
                 </a></li>
             </ul>
-        </aside>`,
+        </aside>
+    `,
     methods: {
         /**
          * Emits an event signalling the panels page should be opened.
