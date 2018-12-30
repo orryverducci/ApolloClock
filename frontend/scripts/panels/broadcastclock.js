@@ -1,3 +1,6 @@
+/**
+ * A panel showing a broadcast style clock.
+ */
 export default {
     template: '<div class="broadcast-clock"><canvas ref="canvas"></canvas></div>',
     props: {
@@ -59,6 +62,10 @@ export default {
         },
         /**
          * Draws an individual second dot on to the canvas.
+         * 
+         * @param {RenderingContext} context The canvas context to draw on to.
+         * @param {Number} number The dot number to be drawn.
+         * @param {Boolean} active Specifies if the dot should be drawn as an active dot.
          */
         DrawDot: function(context, number, active) {
             // Start drawing a path
@@ -75,6 +82,9 @@ export default {
             context.fill();
         }
     },
+    /**
+     * Sets up the clock and resize events on mount.
+     */
     mounted: function() {
         // Set canvas size
         this.CalculatePositions();
@@ -87,11 +97,23 @@ export default {
         });
     },
     watch: {
+        /**
+         * Redraws the clock when the time is changed.
+         */
         time: function() {
             this.DrawClock();
         }
     },
+    /**
+     * The scale the clock should be drawn at.
+     * */
     scaleFactor: 1,
+    /**
+     * The positions of all the dots.
+     * */
     dotPositions: new Array(59),
+    /**
+     * The positions of the text.
+     */
     textPosition: new Array(2)
 }
