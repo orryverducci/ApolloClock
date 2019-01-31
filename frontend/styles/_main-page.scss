@@ -1,9 +1,9 @@
 #main-page {
+    display: flex;
     overflow: hidden;
 
     #panels {
-        height: 100%;
-        width: 100vw;
+        flex: 1 0 0;
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(1, 1fr);
