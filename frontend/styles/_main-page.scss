@@ -1,6 +1,7 @@
 #main-page {
     display: flex;
     overflow: hidden;
+    position: relative;
 
     #panels {
         flex: 1 0 0;
