@@ -28,20 +28,42 @@ a {
         flex: 1 0 0;
     }
 
-    nav {
-        flex: 0 0 auto;
-        background: #37474f;
-        
+    header {
+        background: #37474F;
+        flex: 0 0 2.0rem;
+        font-size: 0.8rem;
+        -webkit-user-select: none;
+        -webkit-app-region: drag;
+        display: flex;
+        align-items: center;
+        padding: 0 0.3rem;
+
+        &[data-inactive="true"] {
+            background: #62727B;
+            color: #CFD8DC;
+        }
+
+        h1 {
+            font-size: inherit;
+            font-weight: normal;
+            margin: 0;
+            flex: 1 0 0;
+            text-align: center;
+        }
+
         a {
-            display: inline-block;
-            padding: 1rem 1.5rem;
+            display: flex;
+            cursor: default;
+            flex: 0 0 1.5rem;
+            height: 1.5rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.2rem;
+            -webkit-app-region: no-drag;
 
             &:hover, &:active {
-                background: #62727b;
-            }
-
-            .icon {
-                margin-right: 0.5rem;
+                background: #62727B;
             }
         }
     }

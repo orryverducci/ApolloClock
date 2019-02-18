@@ -11,6 +11,8 @@ class Platform {
     constructor() {
         let deviceInfo = Device.getInfo()
         this.platformName = deviceInfo.platform;
+        this.enableTitleBar = false;
+        this.enableTitleBarButtons = false;
     }
 
     /**
@@ -23,6 +25,34 @@ class Platform {
         App.addListener("backButton", () => {
             App.exitApp();
         });
+    }
+
+    /**
+     * Minimizes the application.
+     */
+    Minimize() {
+        console.info("Minimizing the application is not available on this platform");
+    }
+
+    /**
+     * Maximizes the application.
+     */
+    Maximize() {
+        console.info("Maximizing the application is not available on this platform");
+    }
+
+    /**
+     * Restores the application.
+     */
+    Restore() {
+        console.info("Restoring the application is not available on this platform");
+    }
+    
+    /**
+     * Closes the application.
+     */
+    Close() {
+        console.info("Closing the application is not available on this platform");
     }
 
     /**

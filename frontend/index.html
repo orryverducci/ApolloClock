@@ -8,7 +8,14 @@
     </head>
     <body>
         <div id="container">
-            <nav v-if="showBack"><a href="#" v-on:click="GoBack($event)"><span class="icon"><font-awesome-icon icon="caret-square-left" /></span>Back</a></nav>
+            <header v-if="titleBarVisible" :data-platform="platform" :data-inactive="!foreground">
+                <a v-if="showBack" href="#" v-on:click.prevent="GoBack"><font-awesome-icon icon="arrow-left" /></a>
+                <h1>Apollo Clock</h1>
+                <a href="#" v-if="titleButtonsVisible" v-on:click.prevent="Minimize"><font-awesome-icon icon="window-minimize" /></a>
+                <a href="#" v-if="!maximized && titleButtonsVisible" v-on:click.prevent="Maximize"><font-awesome-icon icon="window-maximize" /></a>
+                <a href="#" v-if="maximized && titleButtonsVisible" v-on:click.prevent="Restore"><font-awesome-icon icon="window-restore" /></a>
+                <a href="#" v-if="titleButtonsVisible" v-on:click.prevent="Close"><font-awesome-icon icon="times" /></a>
+            </header>
             <component v-bind:is="currentPage"></component>
         </div>
     </body>

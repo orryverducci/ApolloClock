@@ -64,7 +64,8 @@ function createMainWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        show: false
+        show: false,
+        titleBarStyle: "hiddenInset"
     });
     // Load the main window
     mainWindow.loadURL("app://apolloclock/index.html");

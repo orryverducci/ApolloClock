@@ -1,3 +1,5 @@
+import EventHub from "./eventhub.js";
+
 const {ipcRenderer} = require("electron"),
     os = require("os"),
     Store = require("electron-store");
@@ -12,14 +14,62 @@ class Platform {
     constructor() {
         this.store = new Store();
         this.platformName = os.platform;
+        this.enableTitleBar = true;
+        if (this.platformName != "darwin") {
+            this.enableTitleBarButtons = true;
+        } else {
+            this.enableTitleBarButtons = false;
+        }
     }
 
     /**
      * Shows the application when it is ready.
      */
     AppReady() {
+        // Subscrive to window focus events, emitting them as application events
+        remote.getCurrentWindow().on("focus", () => {
+            EventHub.$emit("window-foreground");
+        });
+        remote.getCurrentWindow().on("blur", () => {
+            EventHub.$emit("window-background");
+        });
+        // Subscrive to window visual state events, emitting them as application events
+        remote.getCurrentWindow().on("maximize", () => {
+            EventHub.$emit("window-maximize");
+        });
+        remote.getCurrentWindow().on("unmaximize", () => {
+            EventHub.$emit("window-restore");
+        });
         // Show the application window
         ipcRenderer.send("ready");
+    }
+
+    /**
+     * Minimizes the application.
+     */
+    Minimize() {
+        remote.getCurrentWindow().minimize();
+    }
+
+    /**
+     * Maximizes the application.
+     */
+    Maximize() {
+        remote.getCurrentWindow().maximize();
+    }
+
+    /**
+     * Restores the application.
+     */
+    Restore() {
+        remote.getCurrentWindow().unmaximize();
+    }
+
+    /**
+     * Closes the application.
+     */
+    Close() {
+        remote.getCurrentWindow().close();
     }
 
     /**
