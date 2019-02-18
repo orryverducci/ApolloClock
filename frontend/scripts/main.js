@@ -33,7 +33,11 @@ new Vue({
         /**
          * The page currently being displayed.
          */
-        currentPage: "MainPage"
+        currentPage: "MainPage",
+        /**
+         * The platform the application is running on.
+         */
+        platform: ""
     },
     methods: {
         /**
@@ -56,6 +60,7 @@ new Vue({
      * Fires the platform specific AppReady method and subscribes to the global events on mount.
      */
     mounted: function() {
+        this.platform = platform.platformName;
         platform.AppReady();
         EventHub.$on("open-page", this.OpenPage);
         

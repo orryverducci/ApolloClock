@@ -1,4 +1,5 @@
 const {ipcRenderer} = require("electron"),
+    os = require("os"),
     Store = require("electron-store");
 
 /**
@@ -10,6 +11,7 @@ class Platform {
      */
     constructor() {
         this.store = new Store();
+        this.platformName = os.platform;
     }
 
     /**

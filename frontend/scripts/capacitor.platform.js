@@ -1,10 +1,18 @@
 import { Plugins } from "@capacitor/core";
-const { App, SplashScreen } = Plugins;
+const { App, Device, SplashScreen } = Plugins;
 
 /**
  * Provides platform specific functionality.
  */
 class Platform {
+    /**
+     * Initialises the platform class.
+     */
+    constructor() {
+        let deviceInfo = Device.getInfo()
+        this.platformName = deviceInfo.platform;
+    }
+
     /**
      * Shows the application when it is ready.
      */
