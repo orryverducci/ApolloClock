@@ -1,6 +1,6 @@
 import EventHub from "./eventhub.js";
 
-const {ipcRenderer} = require("electron"),
+const {ipcRenderer, remote} = require("electron"),
     os = require("os"),
     Store = require("electron-store");
 
