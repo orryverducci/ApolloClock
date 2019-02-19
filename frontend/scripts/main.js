@@ -121,7 +121,6 @@ new Vue({
         SetRestored: function() {
             this.maximized = false;
         }
-        }
     },
     /**
      * Fires the platform specific AppReady method and subscribes to the global events on mount.
