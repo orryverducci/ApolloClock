@@ -25,6 +25,10 @@ new Vue({
      * Sets up the Font Awesome component and adds the left caret icon to its library on creation.
      */
     created: function() {
+        // Setup platform configuration
+        this.platform = platform.platformName;
+        this.titleBarVisible = platform.enableTitleBar;
+        this.titleButtonsVisible = platform.enableTitleBarButtons;
         // Setup global component for Font Awesome
         Vue.component("font-awesome-icon", FontAwesomeIcon);
         library.add(faArrowLeft);
@@ -126,9 +130,6 @@ new Vue({
      * Fires the platform specific AppReady method and subscribes to the global events on mount.
      */
     mounted: function() {
-        this.platform = platform.platformName;
-        this.titleBarVisible = platform.enableTitleBar;
-        this.titleButtonsVisible = platform.enableTitleBarButtons;
         platform.AppReady();
         EventHub.$on("open-page", this.OpenPage);
         EventHub.$on("window-foreground", this.SetForeground);
