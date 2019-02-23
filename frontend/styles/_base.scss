@@ -43,11 +43,20 @@ a {
             color: #CFD8DC;
         }
 
+        .button-group {
+            flex: 1 0 0;
+            display: flex;
+
+            &.system-buttons {
+                justify-content: flex-end;
+            }
+        }
+
         h1 {
             font-size: inherit;
             font-weight: normal;
             margin: 0;
-            flex: 1 0 0;
+            flex: 0 0 auto;
             text-align: center;
         }
 
