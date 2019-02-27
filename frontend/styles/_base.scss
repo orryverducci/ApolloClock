@@ -76,6 +76,80 @@ a {
             }
         }
 
+        &[data-platform="win32"] {
+            font-size: 0.75rem;
+            padding: 0;
+
+            .button-group {
+                flex: 0 0 auto;
+                display: flex;
+            }
+
+            h1 {
+                text-align: left;
+                padding: 0 0.5rem;
+                flex: 1 0 0;
+            }
+
+            a {
+                flex-basis: 2.875rem;
+                width: 2.875rem;
+                height: 2rem;
+                border-radius: 0;
+
+                &:before {
+                    font-family: "Segoe MDL2 Assets";
+                    font-size: 0.625rem;
+                }
+
+                svg {
+                    display: none;
+                }
+
+                &#back-button {
+                    background: #3379D9;
+
+                    &:before {
+                        content: "\e830";
+                    }
+
+                    &:hover {
+                        background: #559CE4;
+                    }
+
+                    &:active {
+                        background: #235A9F;
+                    }
+                }
+
+                &#minimize-button:before {
+                    content: "\e921";
+                }
+
+                &#maximize-button:before {
+                    content: "\e922";
+                }
+
+                &#restore-button:before {
+                    content: "\e923";
+                }
+
+                &#close-button {
+                    &:before {
+                        content: "\e8bb";
+                    }
+                    
+                    &:hover {
+                        background: #E81123;
+                    }
+
+                    &:active {
+                        background: #F1707A;
+                    }
+                }
+            }
+        }
+
         &[data-platform="darwin"] {
             flex-basis: 2.375rem;
             background: linear-gradient(to bottom, #E5E5E5 0, #CDCCCD 100%);
