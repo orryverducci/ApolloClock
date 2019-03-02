@@ -80,6 +80,10 @@ a {
             font-size: 0.75rem;
             padding: 0;
 
+            &[data-inactive="true"] {
+                background: #37474F;
+            }
+
             .button-group {
                 flex: 0 0 auto;
                 display: flex;
@@ -87,7 +91,7 @@ a {
 
             h1 {
                 text-align: left;
-                padding: 0 0.5rem;
+                padding: 0 0.7rem;
                 flex: 1 0 0;
             }
 
@@ -96,6 +100,14 @@ a {
                 width: 2.875rem;
                 height: 2rem;
                 border-radius: 0;
+
+                &:hover {
+                    background: #455A64;
+                }
+
+                &:active {
+                    background: #546E7A;
+                }
 
                 &:before {
                     font-family: "Segoe MDL2 Assets";
@@ -107,18 +119,8 @@ a {
                 }
 
                 &#back-button {
-                    background: #3379D9;
-
                     &:before {
                         content: "\e830";
-                    }
-
-                    &:hover {
-                        background: #559CE4;
-                    }
-
-                    &:active {
-                        background: #235A9F;
                     }
                 }
 
@@ -144,6 +146,7 @@ a {
                     }
 
                     &:active {
+                        color: #000;
                         background: #F1707A;
                     }
                 }
