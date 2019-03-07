@@ -26,6 +26,13 @@ class Platform {
      * Shows the application when it is ready.
      */
     AppReady() {
+        // Subscrive to full screen events, emitting them as application events
+        remote.getCurrentWindow().on("enter-full-screen", () => {
+            EventHub.$emit("enter-full-screen");
+        });
+        remote.getCurrentWindow().on("leave-full-screen", () => {
+            EventHub.$emit("leave-full-screen");
+        });
         // Subscrive to window focus events, emitting them as application events
         remote.getCurrentWindow().on("focus", () => {
             EventHub.$emit("window-foreground");
@@ -40,8 +47,29 @@ class Platform {
         remote.getCurrentWindow().on("unmaximize", () => {
             EventHub.$emit("window-restore");
         });
+        // Set to exit full screen when the escape key is pressed
+        document.addEventListener("keydown", (event) => {
+            if (remote.getCurrentWindow().isFullScreen() && event.key == "Escape") {
+                remote.getCurrentWindow().setFullScreen(false);
+                event.preventDefault();
+            }
+        });
         // Show the application window
         ipcRenderer.send("ready");
+    }
+
+    /**
+     * Enters full screen mode.
+     */
+    Expand() {
+        remote.getCurrentWindow().setFullScreen(true);
+    }
+
+    /**
+     * Exits full screen mode.
+     */
+    Compress() {
+        remote.getCurrentWindow().setFullScreen(false);
     }
 
     /**

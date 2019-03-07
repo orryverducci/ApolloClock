@@ -28,6 +28,20 @@ class Platform {
     }
 
     /**
+     * Enters full screen mode.
+     */
+    Expand() {
+        console.info("Entering full screen is not available on this platform");
+    }
+
+    /**
+     * Exits full screen mode.
+     */
+    Compress() {
+        console.info("Exiting full screen is not available on this platform");
+    }
+
+    /**
      * Minimizes the application.
      */
     Minimize() {

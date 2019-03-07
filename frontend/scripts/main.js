@@ -1,7 +1,7 @@
 import Vue from "Vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faArrowLeft, faWindowMinimize, faWindowMaximize, faWindowRestore, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faExpand, faCompress, faWindowMinimize, faWindowMaximize, faWindowRestore, faTimes } from "@fortawesome/free-solid-svg-icons";
 import {platform} from "platform";
 import MainPage from "./pages/main/page.js";
 import AboutPage from "./pages/about/page.js";
@@ -32,6 +32,8 @@ new Vue({
         // Setup global component for Font Awesome
         Vue.component("font-awesome-icon", FontAwesomeIcon);
         library.add(faArrowLeft);
+        library.add(faExpand);
+        library.add(faCompress);
         library.add(faWindowMinimize);
         library.add(faWindowMaximize);
         library.add(faWindowRestore);
@@ -61,7 +63,15 @@ new Vue({
         /**
          * If the window is currently maximized.
          */
-        maximized: false
+        maximized: false,
+        /**
+         * If the window is currently full screen.
+         */
+        fullScreen: false,
+        /**
+         * If the full screen 'how to exit' notice is visible.
+         */
+        fullScreenNoticeVisible: false
     },
     methods: {
         /**
@@ -76,6 +86,18 @@ new Vue({
          */
         GoBack: function() {
             this.currentPage = "MainPage";
+        },
+        /**
+         * Enters full screen mode.
+         */
+        Expand: function() {
+            platform.Expand();
+        },
+        /**
+         * Exits full screen mode.
+         */
+        Compress: function() {
+            platform.Compress();
         },
         /**
          * Minimizes the application.
@@ -124,6 +146,27 @@ new Vue({
          */
         SetRestored: function() {
             this.maximized = false;
+        },
+        /**
+         * Sets that the window is full screen and shows the full screen 'how to exit' notice.
+         */
+        EnterFullScreen: function() {
+            this.fullScreen = true;
+            this.fullScreenNoticeVisible = true;
+            setTimeout(this.HideFullScreenNotice, 4000);
+        },
+        /**
+         * Sets that the window is full screen and shows the full screen 'how to exit' notice.
+         */
+        HideFullScreen: function() {
+            this.fullScreen = false;
+            this.fullScreenNoticeVisible = false;
+        },
+        /**
+         * Hides the full screen 'how to exit' notice.
+         */
+        HideFullScreenNotice: function() {
+            this.fullScreenNoticeVisible = false;
         }
     },
     /**
@@ -136,6 +179,8 @@ new Vue({
         EventHub.$on("window-background", this.SetBackground);
         EventHub.$on("window-maximize", this.SetMaximized);
         EventHub.$on("window-restore", this.SetRestored);
+        EventHub.$on("enter-full-screen", this.EnterFullScreen);
+        EventHub.$on("leave-full-screen", this.HideFullScreen);
     },
     /**
      * Unsubscribes from the global events when being destroyed.
@@ -146,5 +191,7 @@ new Vue({
         EventHub.$off("window-background", this.SetBackground);
         EventHub.$off("window-maximize", this.SetMaximized);
         EventHub.$off("window-restore", this.SetRestored);
+        EventHub.$off("enter-full-screen", this.EnterFullScreen);
+        EventHub.$off("leave-full-screen", this.HideFullScreen);
     },
 });
