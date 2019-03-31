@@ -13,13 +13,19 @@ class Platform {
      */
     constructor() {
         this.store = new Store();
-        this.platformName = os.platform();
         this.enableTitleBar = true;
-        if (this.platformName != "darwin") {
+        if (os.platform() != "darwin") {
             this.enableTitleBarButtons = true;
         } else {
             this.enableTitleBarButtons = false;
         }
+    }
+
+    /**
+     * Gets the platform name.
+     */
+    GetPlatform() {
+        return os.platform();
     }
 
     /**

@@ -9,10 +9,16 @@ class Platform {
      * Initialises the platform class.
      */
     constructor() {
-        let deviceInfo = Device.getInfo()
-        this.platformName = deviceInfo.platform;
         this.enableTitleBar = false;
         this.enableTitleBarButtons = false;
+    }
+
+    /**
+     * Gets the platform name.
+     */
+    async GetPlatform() {
+        let deviceInfo = await Device.getInfo();
+        return deviceInfo.platform;
     }
 
     /**

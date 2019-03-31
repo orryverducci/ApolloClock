@@ -24,9 +24,9 @@ new Vue({
     /**
      * Sets up the Font Awesome component and adds the left caret icon to its library on creation.
      */
-    created: function() {
+    created: async function() {
         // Setup platform configuration
-        this.platform = platform.platformName;
+        this.platform = await platform.GetPlatform();
         this.titleBarVisible = platform.enableTitleBar;
         this.titleButtonsVisible = platform.enableTitleBarButtons;
         // Setup global component for Font Awesome
