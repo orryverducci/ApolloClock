@@ -1,3 +1,5 @@
+import ResizeObserver from "resize-observer-polyfill";
+
 /**
  * A panel showing a broadcast style clock.
  */
@@ -95,10 +97,11 @@ export default {
         // Draw the clock
         this.DrawClock();
         // Handle resize event to redraw the clock
-        window.addEventListener("resize", () => {
+        let resizeObserver = new ResizeObserver(() => {
             this.CalculatePositions();
             this.DrawClock();
         });
+        resizeObserver.observe(this.$el);
     },
     watch: {
         /**
