@@ -98,8 +98,14 @@ export default {
         this.DrawClock();
         // Handle resize event to redraw the clock
         let resizeObserver = new ResizeObserver(() => {
-            this.CalculatePositions();
-            this.DrawClock();
+            if (!this.$options.drawThrottled) {
+                this.$options.drawThrottled = true;
+                this.CalculatePositions();
+                this.DrawClock();
+                setTimeout(() => {
+                    this.$options.drawThrottled = false;
+                }, 250);
+            }
         });
         resizeObserver.observe(this.$el);
     },
@@ -122,5 +128,9 @@ export default {
     /**
      * The positions of the text.
      */
-    textPosition: new Array(2)
+    textPosition: new Array(2),
+    /**
+     * If redrawing is currently being throttled during resizing.
+     */
+    drawThrottled: false
 }
