@@ -4,6 +4,15 @@ import ResizeObserver from "resize-observer-polyfill";
  * A panel showing a broadcast style clock.
  */
 export default {
+    /**
+     * Unsubscribes from resize event and clears throttle timeout when being destroyed.
+     */
+    beforeDestroy: function() {
+        this.$options.resizeObserver.unobserve(this.$el);
+        if (this.$options.throttleTimeout !== null) {
+            clearTimeout(this.$options.throttleTimeout);
+        }
+    },
     template: `
         <div class="broadcast-clock">
             <canvas ref="canvas"></canvas>
@@ -97,17 +106,17 @@ export default {
         // Draw the clock
         this.DrawClock();
         // Handle resize event to redraw the clock
-        let resizeObserver = new ResizeObserver(() => {
+        this.$options.resizeObserver = new ResizeObserver(() => {
             if (!this.$options.drawThrottled) {
                 this.$options.drawThrottled = true;
                 this.CalculatePositions();
                 this.DrawClock();
-                setTimeout(() => {
+                this.$options.throttleTimeout = setTimeout(() => {
                     this.$options.drawThrottled = false;
                 }, 250);
             }
         });
-        resizeObserver.observe(this.$el);
+        this.$options.resizeObserver.observe(this.$el);
     },
     watch: {
         /**
@@ -132,5 +141,13 @@ export default {
     /**
      * If redrawing is currently being throttled during resizing.
      */
-    drawThrottled: false
+    drawThrottled: false,
+    /**
+     * The resize observer.
+     */
+    resizeObserver: null,
+    /**
+     * The timeout for resetting the throttle.
+     */
+    throttleTimeout: null
 }
