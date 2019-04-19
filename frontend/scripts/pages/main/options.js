@@ -16,10 +16,10 @@ export default {
     template: `
         <aside id="options-menu">
             <ul>
-                <li><a href="#" v-on:click="OpenPanels($event)">
+                <li><a href="#" v-on:click.prevent="OpenPanels">
                     <span class="icon"><font-awesome-icon icon="object-group" /></span>Change Panels
                 </a></li>
-                <li><a href="#" v-on:click="OpenAbout($event)">
+                <li><a href="#" v-on:click.prevent="OpenAbout">
                     <span class="icon"><font-awesome-icon icon="info-circle" /></span>About
                 </a></li>
             </ul>
@@ -28,18 +28,14 @@ export default {
     methods: {
         /**
          * Emits an event signalling the panels page should be opened.
-         * @param {Event} event The event which fired this method.
          */
-        OpenPanels: function(event) {
-            event.preventDefault();
+        OpenPanels: function() {
             alert("Not Yet Implemented");
         },
         /**
          * Emits an event signalling the about page should be opened.
-         * @param {Event} event The event which fired this method.
          */
-        OpenAbout: function(event) {
-            event.preventDefault();
+        OpenAbout: function() {
             EventHub.$emit("open-page", "about");
         }
     }
