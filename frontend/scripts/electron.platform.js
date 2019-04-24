@@ -118,10 +118,11 @@ class Platform {
     /**
      * Gets a configuration setting.
      * @param {string} key The key for the data to be retrieved.
+     * @param {string} defaultValue The default value to be returned if the key has not yet been set.
      * @returns {string} The configuration data.
      */
-    GetConfig(key) {
-        return this.store.get(key);
+    GetConfig(key, defaultValue) {
+        return this.store.get(key, defaultValue);
     }
 }
 

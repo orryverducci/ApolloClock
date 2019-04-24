@@ -90,10 +90,15 @@ class Platform {
     /**
      * Gets a configuration setting.
      * @param {string} key The key for the data to be retrieved.
+     * @param {string} defaultValue The default value to be returned if the key has not yet been set.
      * @returns {string} The configuration data.
      */
-    async GetConfig(key) {
-        return await Storage.get({ key: key });
+    async GetConfig(key, defaultValue) {
+        configKeys = await Storage.keys();
+        if (configKeys.includes(key)) {
+            return await Storage.get({ key: key });
+        }
+        return defaultValue;
     }
 }
 
