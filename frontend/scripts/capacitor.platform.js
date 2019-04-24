@@ -1,5 +1,5 @@
 import { Plugins } from "@capacitor/core";
-const { App, Device, SplashScreen } = Plugins;
+const { App, Device, SplashScreen, Storage } = Plugins;
 
 /**
  * Provides platform specific functionality.
