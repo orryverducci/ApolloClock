@@ -12,7 +12,9 @@ let mainWindow = null;
 app.setAppPath(__dirname);
 
 // Register the app protocol as a standard stream
-protocol.registerStandardSchemes(["app"], { secure: true });
+protocol.registerSchemesAsPrivileged([
+    { scheme: "app", privileges: { standard: true, secure: true } }
+])
 
 /**
  * Creates a standard scheme for use by the application
@@ -66,7 +68,10 @@ function createMainWindow() {
         height: 600,
         show: false,
         frame: false,
-        titleBarStyle: "hiddenInset"
+        titleBarStyle: "hiddenInset",
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
     // Load the main window
     mainWindow.loadURL("app://apolloclock/index.html");
