@@ -75,8 +75,7 @@ gulp.task("build:js-capacitor", () => {
                     "process.env.NODE_ENV": JSON.stringify("development")
                 }),
                 resolve({
-                    main: false,
-                    jsnext: true
+                    mainFields: ["module", "jsnext", "jsnext:main"]
                 }),
                 terser()
             ]
@@ -97,8 +96,7 @@ gulp.task("build:js-electron", () => {
                     Vue: path.join(__dirname, "node_modules", "vue", "dist", "vue.esm.js")
                 }),
                 resolve({
-                    main: false,
-                    jsnext: true
+                    mainFields: ["module", "jsnext", "jsnext:main"]
                 }),
                 terser()
             ]
