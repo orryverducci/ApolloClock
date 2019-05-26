@@ -15,6 +15,7 @@
   "dependencies": {
     "electron-store": "^3.2.0",
     "esm": "^3.2.25",
+    "gulp-sourcemaps": "^2.6.5",
     "jsonfile": "^5.0.0"
   },
   "devDependencies": {

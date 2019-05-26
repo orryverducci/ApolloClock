@@ -12,7 +12,8 @@ const gulp = require("gulp"),
     os = require("os"),
     alias = require("rollup-plugin-alias"),
     replace = require("rollup-plugin-replace"),
-    { terser } = require("rollup-plugin-terser");
+    { terser } = require("rollup-plugin-terser"),
+    sourcemaps = require('gulp-sourcemaps');
 
 /***************
 *** CLEAN TASKS
@@ -64,6 +65,7 @@ gulp.task("build:sass", () => {
 
 gulp.task("build:js-capacitor", () => {
     return gulp.src(path.join(__dirname, "frontend", "scripts", "main.js"))
+        .pipe(sourcemaps.init())
         .pipe(rollup({
             cache: false,
             plugins: [
@@ -83,12 +85,14 @@ gulp.task("build:js-capacitor", () => {
             file: "capacitor.main.js",
             format: "es"
         }))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
 });
 
 gulp.task("build:js-electron", () => {
     return gulp.src(path.join(__dirname, "frontend", "scripts", "main.js"))
-    .pipe(rollup({
+        .pipe(sourcemaps.init())
+        .pipe(rollup({
             cache: false,
             plugins: [
                 alias({
@@ -104,6 +108,7 @@ gulp.task("build:js-electron", () => {
             file: "electron.main.js",
             format: "es"
         }))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.join(__dirname, "build", "scripts")));
 });
 
