@@ -95,8 +95,9 @@ class Platform {
      */
     async GetConfig(key, defaultValue) {
         let configKeys = await Storage.keys();
-        if (configKeys.includes(key)) {
-            return await Storage.get({ key: key });
+        if (configKeys.keys.includes(key)) {
+            let result = await Storage.get({ key: key });
+            return result.value;
         }
         return defaultValue;
     }
